@@ -125,6 +125,15 @@
   .tool{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:15px 17px}
   .tool b{color:var(--acc2)}.tool span{color:var(--mut);font-size:14px}
 
+  /* mapping table */
+  .map{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+  .map th{text-align:left;padding:9px 12px;color:var(--mut);font-weight:800;border-bottom:1px solid var(--line);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}
+  .map td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;width:50%}
+  .map tr:last-child td{border-bottom:none}
+  .map .w{color:#c3ccdb}
+  .map .c{color:var(--acc2);font-weight:650}
+  .map td small{color:var(--dim);display:block;font-weight:400;margin-top:3px;font-size:12.5px}
+
   /* reference */
   .ref{list-style:none;padding:0;margin:16px 0}
   .ref li{margin:0 0 11px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:14.5px}
@@ -163,7 +172,7 @@
 
 <div class="alert">
   <div class="ahd">🇨🇳 Building for Chinese users? Read this first</div>
-  <p>The English videos below are the best way to learn <em>the method</em> — describe, build, fix. But their <b>tools won't work well in China</b>: Firebase is blocked, Vercel is slow, Supabase lags. <b>Watch them for the skill, not the stack.</b> When you actually build for Chinese users, use the China-native path in the <a href="#china">🇨🇳 Building for China</a> section below — WeChat Mini Program + 腾讯云 CloudBase + a domestic AI tool. Same skill, right plumbing.</p>
+  <p>The English videos below are the best way to learn <em>the method</em> — describe, build, fix. But their <b>tools won't work well in China</b>: Firebase is blocked, Vercel is slow, Supabase lags. <b>Watch them for the skill, not the stack.</b> When you actually build for Chinese users, follow the <a href="#china">🇨🇳 Building for China</a> section below — it has a <b>Western→China service cheat-sheet</b> so you can follow any English tutorial and just swap in the right domestic tool (WeChat Mini Program + 腾讯云 CloudBase + a local AI tool). Same skill, right plumbing.</p>
 </div>
 
 <!-- INSPIRATION -->
@@ -326,6 +335,29 @@
       <div class="tool"><b>💰 红利</b> — <span>微信"AI 小程序成长计划"在送免费云资源 + 混元算力（6 个月免费 CloudBase、上亿 Token）。开始前先薅。</span></div>
       <div class="tool" style="border-color:#5a4a22"><b>⚠️ 注意</b> — <span>视频里的 Supabase / Firebase / Vercel 在国内被墙或很慢，别照搬。独立网站/域名需 <b>ICP 备案</b>；走小程序则简单很多。</span></div>
     </div>
+  </div>
+</article>
+<article class="card" data-step>
+  <div class="banner" style="background:linear-gradient(120deg,rgba(109,155,255,.14),rgba(95,240,192,.06))"><span class="ico">🔄</span><div><div class="bt">Western → China · 服务对照表</div><div style="color:var(--mut);font-size:14px">跟着英文教程做，看到左边的服务就换成右边的国内对应</div></div></div>
+  <div class="body">
+    <label class="chk"><input type="checkbox"></label>
+    <h3>The translation cheat-sheet</h3>
+    <p class="why">Every English tutorial assumes Western services. Keep this open while you follow along — whenever the video reaches for a tool on the left, swap in the right-hand option. The <em>steps</em> are the same; only the service name changes.</p>
+    <table class="map">
+      <thead><tr><th>英文教程里的 (West)</th><th>中国换成 (China)</th></tr></thead>
+      <tbody>
+        <tr><td class="w">AI coding tool<br><small>Cursor / Codex</small></td><td class="c">Cursor（国内可直接用）/ Trae / CodeBuddy / 通义灵码<small>新手出原型选 Trae；微信生态选 CodeBuddy</small></td></tr>
+        <tr><td class="w">AI model<br><small>Claude / GPT / Gemini</small></td><td class="c">DeepSeek / 通义千问 Qwen / 腾讯混元 / 豆包 / Kimi<small>写代码首选 DeepSeek——能力强、API 极便宜</small></td></tr>
+        <tr><td class="w">Backend + DB + 登录<br><small>Supabase / Firebase</small></td><td class="c">腾讯云 CloudBase 云开发<small>最接近的对标；小程序用「微信云开发」（同一套）</small></td></tr>
+        <tr><td class="w">部署 / 托管<br><small>Vercel / Netlify</small></td><td class="c">腾讯云 CloudBase 静态托管 / 阿里云 OSS + CDN<small>⚠️ 国内无完美对标；小程序则直接通过微信发布，不需要这层</small></td></tr>
+        <tr><td class="w">代码托管<br><small>GitHub</small></td><td class="c">Gitee 码云 / 腾讯 CODING / 阿里云效<small>GitHub 国内能用但慢，备份到 Gitee 更稳</small></td></tr>
+        <tr><td class="w">支付<br><small>Stripe</small></td><td class="c">微信支付 / 支付宝<small>小程序里微信支付是原生集成</small></td></tr>
+        <tr><td class="w">登录<br><small>Google / Apple sign-in</small></td><td class="c">微信登录 / 手机号一键登录</td></tr>
+        <tr><td class="w">短信验证码<br><small>Twilio</small></td><td class="c">腾讯云短信 / 阿里云短信</td></tr>
+        <tr><td class="w">分发<br><small>App Store / Google Play</small></td><td class="c">微信小程序（免商店，最快）/ 安卓应用宝·华为·小米商店<small>iOS 原生 App 仍走 App Store 中国区</small></td></tr>
+        <tr><td class="w">域名 / 网站<br><small>买域名直接上线</small></td><td class="c">国内服务器托管的网站/域名需 <b>ICP 备案</b><small>走小程序可绕开大部分备案麻烦，只需主体注册</small></td></tr>
+      </tbody>
+    </table>
   </div>
 </article>
 <article class="card" data-step>
