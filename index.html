@@ -45,6 +45,12 @@
   .pep p{margin:0 0 13px}.pep p:last-child{margin:0}
   .pep strong{color:#fff}
 
+  /* china alert */
+  .alert{background:linear-gradient(160deg,#2a2113,#1c1810);border:1px solid #5a4a22;border-radius:18px;padding:20px 24px;margin:0 0 18px}
+  .alert .ahd{font-weight:800;font-size:16px;color:var(--gold);margin-bottom:8px}
+  .alert p{margin:0;color:#d8cdb4;font-size:14.5px}
+  .alert b{color:#fff}.alert a{color:var(--gold)}
+
   /* phase heading */
   .phase{margin:54px 0 6px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
   .phase .lbl{color:var(--acc2);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
@@ -153,6 +159,11 @@
   <p>Kai — you've spent months hunting for someone to write the code, and not finding them has been genuinely frustrating. Here's the reframe that changes everything:</p>
   <p><strong>Your job was never to write code. It's to describe — clearly and specifically — what you want built.</strong> The AI writes the code. People with zero programming background are shipping real apps with paying customers right now. They're not smarter than you — they just learned to <em>talk</em> to the tools.</p>
   <p>This page takes you from "I've never written a line of code" to "I built and deployed a thing" — light at first, deeper as your confidence grows. Tick each box as you go. The order is the point — don't skip ahead.</p>
+</div>
+
+<div class="alert">
+  <div class="ahd">🇨🇳 Building for Chinese users? Read this first</div>
+  <p>The English videos below are the best way to learn <em>the method</em> — describe, build, fix. But their <b>tools won't work well in China</b>: Firebase is blocked, Vercel is slow, Supabase lags. <b>Watch them for the skill, not the stack.</b> When you actually build for Chinese users, use the China-native path in the <a href="#china">🇨🇳 Building for China</a> section below — WeChat Mini Program + 腾讯云 CloudBase + a domestic AI tool. Same skill, right plumbing.</p>
 </div>
 
 <!-- INSPIRATION -->
@@ -298,10 +309,40 @@
 </article>
 
 <!-- CHINESE -->
-<div class="phase">
-  <span class="lbl">中文资源 · Chinese resources</span>
+<div class="phase" id="china">
+  <span class="lbl">🇨🇳 Building for China · 中文 + 国内技术栈</span>
+  <h2>给中国用户做产品 — 用对的技术栈</h2>
+  <div class="sub">This is your real path, Kai. Same skill as the videos above — but plumbing that actually works in China.</div>
+</div>
+<article class="card" data-step>
+  <div class="banner" style="background:linear-gradient(120deg,rgba(109,155,255,.16),rgba(95,240,192,.08))"><span class="ico">🧰</span><div><div class="bt">推荐技术栈 · The right stack</div><div style="color:var(--mut);font-size:14px">微信小程序 + 腾讯云 CloudBase + 国产 AI 工具</div></div></div>
+  <div class="body">
+    <label class="chk"><input type="checkbox"></label>
+    <h3>Kai 的"国内版"配方</h3>
+    <div class="tools">
+      <div class="tool"><b>AI 编程工具</b> — <span><b>Trae</b>（字节，新手最友好，SOLO 全自动）或 <b>CodeBuddy</b>（腾讯，深度集成微信生态）；<b>Cursor</b> 在国内也能用。搭配国产模型 <b>DeepSeek / 腾讯混元 / 通义千问</b>。</span></div>
+      <div class="tool"><b>后端 + 数据库</b> — <span><b>腾讯云 CloudBase（云开发）</b>：相当于"国内版 Firebase/Supabase"，国内访问稳定，内置 AI 能力，和 Cursor / Trae / Claude Code 无缝协作。</span></div>
+      <div class="tool"><b>产品形态</b> — <span><b>微信小程序</b>：触达中国用户最快，无应用商店摩擦。个人主体注册最简单。</span></div>
+      <div class="tool"><b>💰 红利</b> — <span>微信"AI 小程序成长计划"在送免费云资源 + 混元算力（6 个月免费 CloudBase、上亿 Token）。开始前先薅。</span></div>
+      <div class="tool" style="border-color:#5a4a22"><b>⚠️ 注意</b> — <span>视频里的 Supabase / Firebase / Vercel 在国内被墙或很慢，别照搬。独立网站/域名需 <b>ICP 备案</b>；走小程序则简单很多。</span></div>
+    </div>
+  </div>
+</article>
+<article class="card" data-step>
+  <div class="banner" style="background:linear-gradient(120deg,rgba(95,240,192,.16),rgba(109,155,255,.08))"><span class="ico">⚡</span><div><div class="bt" style="color:var(--acc2)">⭐ 实战案例 · Real build</div><div style="color:var(--mut);font-size:14px">零基础 · 微信小程序 · 1 小时上线</div></div></div>
+  <div class="body">
+    <label class="chk"><input type="checkbox"></label>
+    <h3>纯小白 1 小时上线微信小程序 — CloudBase AI ToolKit + Cursor</h3>
+    <div class="meta"><span class="tag ch">腾讯云开发者社区</span><span class="tag ch">零基础</span></div>
+    <p class="why">一位<b>零编程基础</b>的作者，用 <b>腾讯云 CloudBase AI ToolKit + Cursor</b>，全程靠对话开发，<b>1 小时</b>做出并上线了"AI 情绪创可贴"微信小程序——含云数据库、云函数、AI 智能对话、图文生成。ToolKit 自动建数据库集合、云函数、前端页面。这就是 Kai 该照着走的"国内版"第一步。</p>
+    <div class="do"><b>看完后:</b> 开通腾讯云 CloudBase 控制台 → 装微信开发者工具 + Cursor（或 Trae）→ 照文章把"对话式开发"完整跑一遍，做一个最小的自己的小程序。</div>
+    <a class="go" href="https://cloud.tencent.com/developer/article/2537155" target="_blank" rel="noopener">读实战教程 →</a>
+  </div>
+</article>
+<div class="phase" style="margin-top:34px">
+  <span class="lbl">中文 · 激励 + 参考</span>
   <h2>真实案例：不会写代码，做出了爆款 App</h2>
-  <div class="sub">If reading in Chinese is easier — this story alone is worth the whole page.</div>
+  <div class="sub">This story alone is worth the whole page.</div>
 </div>
 <article class="card" data-step>
   <div class="banner" style="background:linear-gradient(120deg,rgba(255,206,106,.16),rgba(255,143,177,.08))"><span class="ico">🐱</span><div><div class="bt" style="color:var(--gold)">⭐ 真实案例 · Real story</div><div style="color:var(--mut);font-size:14px">App Store 摄影榜 Top 20 · 11万+ 下载 · 零编程</div></div></div>
@@ -318,7 +359,9 @@
   <li><b>知乎 · 十问爆款「小猫补光灯」</b> — 对陈云飞的深度访谈：不会代码的独立开发者，除了 Cursor 还该会什么。 <a href="https://zhuanlan.zhihu.com/p/13642691776" target="_blank" rel="noopener">知乎专栏 →</a></li>
   <li><b>36氪 · 非技术 PM 从 0 到 1 做出产品的 AI 工作流</b> — 一套可复制的方法论。 <a href="https://36kr.com/p/3647020340785672" target="_blank" rel="noopener">36氪 →</a></li>
   <li><b>少数派 · 设计师借助 AI 独立完成浏览器插件</b> — 另一个"非工程师从写代码到上架"的完整记录。 <a href="https://sspai.com/post/94949" target="_blank" rel="noopener">少数派 →</a></li>
-  <li>💡 在<b>小红书</b>搜「AI 编程」「独立开发」「Cursor 教程」「vibe coding」能找到大量中文实操笔记——很多独立开发者都在那里冷启动。</li>
+  <li><b>国产 5 大 AI 编程工具横评</b>（通义灵码 / Trae / CodeBuddy / 文心快码 / CodeGeeX）— 选工具看这个。新手出原型选 Trae，微信生态选 CodeBuddy。 <a href="https://blog.csdn.net/csdngouwei/article/details/160726130" target="_blank" rel="noopener">CSDN 横评 →</a></li>
+  <li><b>微信官方 · 小程序 AI 开发指南</b> — 微信自家的 AI 开发模式接入文档，最权威。 <a href="https://developers.weixin.qq.com/miniprogram/dev/ai/guide" target="_blank" rel="noopener">微信开放文档 →</a></li>
+  <li>💡 在<b>小红书</b>搜「AI 编程」「独立开发」「Cursor 教程」「CloudBase 小程序」「vibe coding」能找到大量中文实操笔记——很多独立开发者都在那里冷启动。</li>
 </ul>
 
 <!-- REFERENCE -->
