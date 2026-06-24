@@ -3,301 +3,358 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>You Don't Need a Technical Co-Founder — Start Building This Weekend</title>
+<title>Kai — You Don't Need a Technical Co-Founder. You Need a Weekend.</title>
 <style>
   :root{
-    --bg:#0f1115; --card:#181b22; --card2:#1f232c; --line:#2a2f3a;
-    --ink:#e9ecf1; --mut:#9aa3b2; --acc:#5b8cff; --acc2:#7cf0c4; --warn:#ffcf6b;
+    --bg:#0b0d12; --bg2:#10131a; --card:#161a22; --card2:#1d222c; --line:#2a3140;
+    --ink:#eef1f6; --mut:#9aa4b6; --dim:#6b7588;
+    --acc:#6d9bff; --acc2:#5ff0c0; --gold:#ffce6a; --pink:#ff8fb1;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
     margin:0;background:var(--bg);color:var(--ink);
-    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(900px 500px at 80% -10%,rgba(109,155,255,.16),transparent 60%),radial-gradient(700px 420px at 0% 5%,rgba(95,240,192,.10),transparent 55%);
+    background-attachment:fixed;
   }
-  .wrap{max-width:780px;margin:0 auto;padding:0 20px 80px}
-  a{color:var(--acc);text-decoration:none}
-  a:hover{text-decoration:underline}
-
-  /* hero */
-  header{padding:64px 0 36px;text-align:center}
-  .kicker{color:var(--acc2);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:13px;margin-bottom:14px}
-  h1{font-size:38px;line-height:1.15;margin:0 0 16px;letter-spacing:-.02em}
-  h1 .grad{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .lede{font-size:18px;color:var(--mut);max-width:620px;margin:0 auto}
-  .pill{display:inline-block;margin-top:22px;padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--mut)}
-
-  /* pep box */
-  .pep{background:linear-gradient(160deg,#1b2230,#161922);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:8px 0 40px}
-  .pep p{margin:0 0 12px}
-  .pep p:last-child{margin:0}
-  .pep strong{color:var(--ink)}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px 90px}
+  a{color:var(--acc)}
+  a:hover{text-decoration:none}
 
   /* progress */
-  .progress{position:sticky;top:0;z-index:5;background:rgba(15,17,21,.85);backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);padding:12px 0;margin-bottom:28px}
-  .bar{height:8px;background:var(--card2);border-radius:999px;overflow:hidden}
-  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .4s ease}
-  .ptext{font-size:13px;color:var(--mut);margin-top:6px;text-align:center}
+  .progress{position:sticky;top:0;z-index:20;background:rgba(11,13,18,.82);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);padding:11px 0}
+  .bar{height:7px;background:var(--card2);border-radius:999px;overflow:hidden}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .45s cubic-bezier(.2,.8,.2,1)}
+  .ptext{font-size:12.5px;color:var(--mut);margin-top:6px;text-align:center;letter-spacing:.02em}
 
-  /* section heading */
-  .phase{margin:46px 0 18px}
-  .phase .lbl{color:var(--acc2);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-  .phase h2{font-size:24px;margin:6px 0 4px;letter-spacing:-.01em}
-  .phase .sub{color:var(--mut);font-size:15px}
+  /* hero */
+  header{padding:72px 0 30px;text-align:center}
+  .kicker{display:inline-block;color:var(--acc2);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px;
+    border:1px solid rgba(95,240,192,.3);border-radius:999px;padding:6px 14px;margin-bottom:22px;background:rgba(95,240,192,.06)}
+  h1{font-size:44px;line-height:1.1;margin:0 0 18px;letter-spacing:-.025em;font-weight:800}
+  .grad{background:linear-gradient(95deg,var(--acc),var(--acc2) 70%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:19px;color:var(--mut);max-width:640px;margin:0 auto;line-height:1.6}
+  .pill{display:inline-flex;align-items:center;gap:8px;margin-top:26px;padding:9px 18px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--mut);background:var(--bg2)}
+
+  /* pep */
+  .pep{position:relative;background:linear-gradient(165deg,#1a2433,#13171f);border:1px solid var(--line);border-radius:20px;padding:28px 30px;margin:14px 0 18px;overflow:hidden}
+  .pep::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--acc),var(--acc2))}
+  .pep p{margin:0 0 13px}.pep p:last-child{margin:0}
+  .pep strong{color:#fff}
+
+  /* phase heading */
+  .phase{margin:54px 0 6px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .phase .lbl{color:var(--acc2);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    background:rgba(95,240,192,.08);border:1px solid rgba(95,240,192,.22);border-radius:999px;padding:5px 12px;white-space:nowrap}
+  .phase h2{font-size:27px;margin:10px 0 2px;letter-spacing:-.02em;width:100%;font-weight:800}
+  .phase .sub{color:var(--mut);font-size:15.5px;width:100%}
 
   /* card */
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px;margin:16px 0;
-    display:flex;gap:16px;align-items:flex-start;transition:border-color .2s,transform .2s}
-  .card:hover{border-color:#3a4252}
-  .card.done{opacity:.62}
-  .chk{flex:0 0 auto;margin-top:2px}
-  .chk input{appearance:none;-webkit-appearance:none;width:26px;height:26px;border:2px solid var(--line);
-    border-radius:8px;cursor:pointer;position:relative;background:var(--card2);transition:.15s}
-  .chk input:checked{background:var(--acc2);border-color:var(--acc2)}
-  .chk input:checked::after{content:"";position:absolute;left:8px;top:3px;width:6px;height:12px;
-    border:solid #0f1115;border-width:0 3px 3px 0;transform:rotate(45deg)}
-  .body{flex:1;min-width:0}
-  .body h3{margin:0 0 8px;font-size:18px}
-  .meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
-  .tag{font-size:12px;color:var(--mut);background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
-  .tag.v{color:var(--acc2)}
-  .why{color:var(--mut);font-size:14px;margin:0 0 12px;padding-left:12px;border-left:2px solid var(--acc)}
-  .do{font-size:14px;margin:12px 0 0;background:var(--card2);border-radius:10px;padding:12px 14px}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;margin:18px 0;overflow:hidden;
+    transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+  .card:hover{transform:translateY(-3px);border-color:#3b4658;box-shadow:0 18px 40px -20px rgba(0,0,0,.7)}
+  .card.done{opacity:.55}
+  .card.done .thumb img{filter:grayscale(.6)}
+
+  /* thumbnail */
+  .thumb{display:block;position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;border-bottom:1px solid var(--line)}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+  .card:hover .thumb img{transform:scale(1.045)}
+  .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,10,14,.78))}
+  .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;
+    background:rgba(13,16,22,.55);backdrop-filter:blur(3px);border:2px solid rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;
+    z-index:2;transition:.2s}
+  .play svg{width:26px;height:26px;margin-left:3px;fill:#fff}
+  .card:hover .play{background:var(--acc);border-color:var(--acc);transform:translate(-50%,-50%) scale(1.08)}
+  .vbadge{position:absolute;left:14px;bottom:12px;z-index:2;display:flex;gap:6px;flex-wrap:wrap}
+  .vbadge span{font-size:11.5px;font-weight:600;color:#eaf0ff;background:rgba(10,13,20,.66);backdrop-filter:blur(4px);
+    border:1px solid rgba(255,255,255,.14);border-radius:7px;padding:3px 9px}
+  .vbadge .hot{color:#0a0c10;background:var(--acc2);border-color:var(--acc2)}
+
+  /* banner (non-video cards) */
+  .banner{display:flex;align-items:center;gap:16px;padding:22px 24px;border-bottom:1px solid var(--line);
+    background:linear-gradient(120deg,rgba(109,155,255,.14),rgba(95,240,192,.07))}
+  .banner .ico{font-size:34px;line-height:1;filter:drop-shadow(0 3px 8px rgba(0,0,0,.4))}
+  .banner .bt{font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2)}
+
+  /* card body */
+  .body{padding:20px 24px 24px;position:relative}
+  .body h3{margin:0 30px 10px 0;font-size:19px;line-height:1.3;font-weight:750}
+  .meta{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px}
+  .tag{font-size:12px;color:var(--mut);background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
+  .tag.v{color:var(--acc2);border-color:rgba(95,240,192,.25)}
+  .tag.ch{color:var(--gold);border-color:rgba(255,206,106,.25)}
+  .why{color:#c3ccdb;font-size:14.5px;margin:0 0 14px;padding-left:14px;border-left:3px solid var(--acc)}
+  .why b{color:#fff}
+  .do{font-size:14px;margin:0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
   .do b{color:var(--acc2)}
-  .go{display:inline-block;margin-top:14px;background:var(--acc);color:#0a0c10;font-weight:600;
-    padding:9px 16px;border-radius:10px;font-size:14px}
-  .go:hover{text-decoration:none;filter:brightness(1.08)}
-  .est{font-size:12px;color:var(--mut);margin-left:10px}
+  .go{display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:linear-gradient(95deg,var(--acc),#8aa8ff);color:#0a0c10;font-weight:700;
+    padding:10px 18px;border-radius:11px;font-size:14px;text-decoration:none}
+  .go:hover{filter:brightness(1.08);transform:translateY(-1px)}
+
+  /* done toggle */
+  .chk{position:absolute;top:16px;right:16px;z-index:3}
+  .chk input{appearance:none;-webkit-appearance:none;width:30px;height:30px;border:2px solid var(--line);border-radius:9px;cursor:pointer;
+    background:rgba(13,16,22,.6);backdrop-filter:blur(4px);position:relative;transition:.15s}
+  .chk input:hover{border-color:var(--acc2)}
+  .chk input:checked{background:var(--acc2);border-color:var(--acc2)}
+  .chk input:checked::after{content:"";position:absolute;left:9px;top:4px;width:7px;height:13px;border:solid #0a0c10;border-width:0 3px 3px 0;transform:rotate(45deg)}
+  .body>.chk{top:18px;right:18px}
 
   /* rules */
-  .rules{background:linear-gradient(160deg,#1c2533,#15212a);border:1px solid #2f4a52;border-radius:16px;padding:26px;margin:30px 0}
-  .rules h2{margin:0 0 6px;font-size:22px}
+  .rules{position:relative;background:linear-gradient(160deg,#1b2a30,#14222b);border:1px solid #2f4a52;border-radius:20px;padding:28px;margin:34px 0;overflow:hidden}
+  .rules::before{content:"💬";position:absolute;right:-10px;top:-18px;font-size:120px;opacity:.06}
+  .rules h2{margin:0 0 6px;font-size:23px}
   .rules>p{color:var(--mut);margin:0 0 18px}
-  .rule{display:flex;gap:14px;margin:14px 0}
-  .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--acc2);color:#0a0c10;
-    font-weight:700;display:flex;align-items:center;justify-content:center}
-  .rule b{color:var(--ink)}
-  .rule .ex{display:block;margin-top:5px;color:var(--mut);font-size:14px;font-style:italic;
-    border-left:2px solid var(--acc2);padding-left:10px}
+  .rule{display:flex;gap:15px;margin:16px 0}
+  .num{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--acc2),#9af5d5);color:#06251c;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .rule b{color:#fff}
+  .rule .ex{display:block;margin-top:6px;color:var(--mut);font-size:14px;font-style:italic;border-left:2px solid var(--acc2);padding-left:11px}
 
   /* tools */
-  .tools{display:grid;grid-template-columns:1fr;gap:12px;margin:16px 0}
-  .tool{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-  .tool b{color:var(--acc2)}
-  .tool span{color:var(--mut);font-size:14px}
+  .tools{display:grid;gap:11px;margin:14px 0}
+  .tool{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:15px 17px}
+  .tool b{color:var(--acc2)}.tool span{color:var(--mut);font-size:14px}
 
   /* reference */
-  .ref{margin:14px 0}
-  .ref li{margin:9px 0;color:var(--mut)}
+  .ref{list-style:none;padding:0;margin:16px 0}
+  .ref li{margin:0 0 11px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:14.5px}
   .ref li b{color:var(--ink)}
 
-  footer{margin-top:54px;text-align:center;color:var(--mut);font-size:14px;border-top:1px solid var(--line);padding-top:30px}
-  .sig{margin-top:18px;font-size:13px;color:#6b7585}
-  @media(max-width:560px){h1{font-size:30px}.card{padding:18px}}
+  footer{margin-top:58px;text-align:center;color:var(--mut);font-size:15px;border-top:1px solid var(--line);padding-top:34px}
+  footer strong{color:#fff}
+  .sig{margin-top:20px;font-size:13px;color:var(--dim)}
+
+  @media(max-width:560px){
+    h1{font-size:32px}.lede{font-size:17px}
+    .body{padding:18px}.banner{padding:18px}
+    .play{width:54px;height:54px}.play svg{width:22px;height:22px}
+  }
 </style>
 </head>
 <body>
 <div class="progress"><div class="wrap" style="padding-bottom:0">
   <div class="bar"><i id="barfill"></i></div>
-  <div class="ptext" id="ptext">0 of 6 steps done — your move.</div>
+  <div class="ptext" id="ptext">0 of 7 done — your move, Kai.</div>
 </div></div>
 
 <div class="wrap">
 <header>
   <div class="kicker">For Kai · a starting line, not a syllabus</div>
-  <h1>Kai — you don't need a technical co-founder.<br><span class="grad">You need a weekend.</span></h1>
-  <p class="lede">The thing standing between you and a working product isn't a missing engineer anymore. It's knowing what to learn, in what order. Here's that order.</p>
-  <div class="pill">⏱️ ~3 hours of watching · build something real by Sunday</div>
+  <h1>You don't need a technical co-founder.<br><span class="grad">You need a weekend.</span></h1>
+  <p class="lede">The thing between you and a working product isn't a missing engineer anymore — it's knowing what to learn, in what order. Here's that order.</p>
+  <div class="pill">⏱️ ~3 hours of watching · something real built by Sunday</div>
 </header>
 
 <div class="pep">
-  <p>Kai — you've spent months looking for someone to write the code, and not finding them has been genuinely frustrating. Here's the reframe that changes everything:</p>
-  <p><strong>Your job was never to write code. It's to describe — clearly and specifically — what you want built.</strong> The AI writes the code. People with zero programming background are shipping real apps with paying customers right now, and they're not smarter than you. They just learned to <em>talk</em> to the tools.</p>
-  <p>This page walks you from "I've never written a line of code" to "I built and deployed a thing" — light at first, deeper as your confidence grows. Tick each box as you go. Don't skip ahead; the order is the point.</p>
+  <p>Kai — you've spent months hunting for someone to write the code, and not finding them has been genuinely frustrating. Here's the reframe that changes everything:</p>
+  <p><strong>Your job was never to write code. It's to describe — clearly and specifically — what you want built.</strong> The AI writes the code. People with zero programming background are shipping real apps with paying customers right now. They're not smarter than you — they just learned to <em>talk</em> to the tools.</p>
+  <p>This page takes you from "I've never written a line of code" to "I built and deployed a thing" — light at first, deeper as your confidence grows. Tick each box as you go. The order is the point — don't skip ahead.</p>
 </div>
 
 <!-- INSPIRATION -->
 <div class="phase">
-  <div class="lbl">Optional · watch if you need belief first</div>
+  <span class="lbl">Optional · watch if you need belief first</span>
   <h2>Proof, before the how-to</h2>
-  <div class="sub">If part of you still doesn't buy it, start here. A real person, no code, real success.</div>
+  <div class="sub">If part of you still doesn't buy it, start here — a real person, no code, real success.</div>
 </div>
-<div class="card" data-step style="border-color:#3a4252;background:linear-gradient(160deg,#1d2330,#181b22)">
-  <label class="chk"><input type="checkbox"></label>
+<article class="card" data-step>
+  <a class="thumb" href="https://youtu.be/BxEf3RqIHkw" target="_blank" rel="noopener">
+    <img loading="lazy" src="https://i.ytimg.com/vi/BxEf3RqIHkw/maxresdefault.jpg" alt="Matt Van Horn interview">
+    <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+    <span class="vbadge"><span class="hot">⭐ Real story</span><span>55K views</span><span>Jun 2026 · brand new</span></span>
+  </a>
   <div class="body">
-    <h3>How a Non-Technical Founder Used AI to Become an Open-Source Legend — Matt Van Horn</h3>
-    <div class="meta"><span class="tag">Interview</span><span class="tag v">55,000+ views</span><span class="tag">Jun 2026 · brand new</span></div>
-    <p class="why">Matt has no CS degree, doesn't write code — and by his own admission <b>doesn't even read the code the AI writes</b>. Yet he's shipped tools that hit #1 trending on GitHub (40,000+ stars). His whole method is giving an AI simple verbal commands ("plan this," "build this"), trusting the system, and iterating fast. If you ever think "I'm not technical enough for this" — he's living proof the opposite is now true.</p>
-    <div class="do"><b>Takeaway for you, Kai:</b> the people winning at this aren't the ones who learned to code. They're the ones who started, described what they wanted, and kept going. That can be you.</div>
+    <label class="chk"><input type="checkbox"></label>
+    <h3>A Non-Technical Founder Who Became an Open-Source Legend — Matt Van Horn</h3>
+    <div class="meta"><span class="tag">Interview · inspiration</span></div>
+    <p class="why">Matt has no CS degree, doesn't write code — and by his own admission <b>doesn't even read the code the AI writes</b>. Yet he's shipped tools that hit #1 trending on GitHub (40,000+ stars). His whole method: give an AI simple commands ("plan this," "build this"), trust the system, iterate fast. If you ever think "I'm not technical enough" — he's living proof the opposite is now true.</p>
+    <div class="do"><b>Takeaway for you, Kai:</b> the people winning at this aren't the ones who learned to code — they're the ones who started, described what they wanted, and kept going. That can be you.</div>
     <a class="go" href="https://youtu.be/BxEf3RqIHkw" target="_blank" rel="noopener">Watch it →</a>
   </div>
-</div>
+</article>
 
-<!-- STAGE 0 -->
+<!-- STEP 1 -->
 <div class="phase">
-  <div class="lbl">Step 1 · Mindset</div>
+  <span class="lbl">Step 1 · Mindset</span>
   <h2>Believe it's actually possible</h2>
   <div class="sub">Before any tool. Five minutes of reading to kill the hesitation.</div>
 </div>
-<div class="card" data-step>
-  <label class="chk"><input type="checkbox"></label>
+<article class="card" data-step>
+  <div class="banner"><span class="ico">🧠</span><div><div class="bt">Read · ~8 min</div><div style="color:var(--mut);font-size:14px">Set the right expectations before you touch a tool</div></div></div>
   <div class="body">
+    <label class="chk"><input type="checkbox"></label>
     <h3>The Non-Technical Founder's Guide to Building AI Products</h3>
-    <div class="meta"><span class="tag">Article</span><span class="tag">~8 min read</span></div>
-    <p class="why">Read just the opening + the "vibe coding reality" section. It separates the hype from what's genuinely true now — so you start with realistic confidence instead of either fear or fantasy.</p>
-    <div class="do"><b>What to do after:</b> Write one sentence: "I want to build ____ so that ____ can ____." That sentence is your starting spec.</div>
+    <p class="why">Read just the opening + the "vibe coding reality" section. It separates hype from what's genuinely true now — so you start with realistic confidence, not fear or fantasy.</p>
+    <div class="do"><b>What to do after:</b> write one sentence — "I want to build ____ so that ____ can ____." That sentence is your starting spec.</div>
     <a class="go" href="https://www.aibuilderclub.io/blog/non-technical-founder-ai-guide" target="_blank" rel="noopener">Read it →</a>
   </div>
-</div>
+</article>
 
-<!-- STAGE 1 -->
+<!-- STEP 2 -->
 <div class="phase">
-  <div class="lbl">Step 2 · See it work</div>
+  <span class="lbl">Step 2 · See it work</span>
   <h2>Watch a non-coder build, start to finish</h2>
-  <div class="sub">The "oh — I could actually do this" moment. Lightest video on the page.</div>
+  <div class="sub">The "oh — I could actually do this" moment. Lightest video here.</div>
 </div>
-<div class="card" data-step>
-  <label class="chk"><input type="checkbox"></label>
+<article class="card" data-step>
+  <a class="thumb" href="https://www.youtube.com/watch?v=Q_FZ800Hm4g" target="_blank" rel="noopener">
+    <img loading="lazy" src="https://i.ytimg.com/vi/Q_FZ800Hm4g/maxresdefault.jpg" alt="Vibe coding step by step">
+    <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+    <span class="vbadge"><span>44K views</span><span>Mar 2026</span></span>
+  </a>
   <div class="body">
+    <label class="chk"><input type="checkbox"></label>
     <h3>Vibe Coding Tutorial for Beginners 2026: Step by Step</h3>
-    <div class="meta"><span class="tag">Mikey No Code</span><span class="tag v">44,000+ views</span><span class="tag">Mar 2026</span></div>
-    <p class="why">The gentlest on-ramp here — no setup, no install, just typing. He builds a working <b>habit-tracker app from a single sentence</b>, then adds dark mode and a notes section just by asking. Later he spins up a paid tool with Stripe payments and a Trello-style board — all in plain English (using a tool called Base44). A little promotional, but perfect for the "wait, that's it?" moment.</p>
-    <div class="do"><b>What you'll see:</b> the whole loop — describe → AI builds it → you say "now add X" → it updates. No code touched. <b>What to do after:</b> nothing yet. Just let it sink in that this is normal and doable.</div>
+    <div class="meta"><span class="tag">Mikey No Code</span><span class="tag v">gentlest on-ramp</span></div>
+    <p class="why">No setup, no install — just typing. He builds a working <b>habit-tracker app from a single sentence</b>, then adds dark mode and notes just by asking. Later he spins up a paid tool with Stripe payments and a Trello-style board — all in plain English (tool: Base44). A little promotional, but perfect for the "wait, that's it?" moment.</p>
+    <div class="do"><b>What you'll see:</b> the whole loop — describe → AI builds it → "now add X" → it updates. No code touched. <b>After:</b> nothing yet. Just let it sink in that this is normal and doable.</div>
     <a class="go" href="https://www.youtube.com/watch?v=Q_FZ800Hm4g" target="_blank" rel="noopener">Watch it →</a>
   </div>
-</div>
+</article>
 
-<!-- STAGE 2 -->
+<!-- STEP 3 -->
 <div class="phase">
-  <div class="lbl">Step 3 · The real skill</div>
+  <span class="lbl">Step 3 · The real skill</span>
   <h2>Learn to write it down first</h2>
-  <div class="sub">This is the unlock. The difference between people who ship and people who spin.</div>
+  <div class="sub">The unlock — the difference between people who ship and people who spin.</div>
 </div>
-<div class="card" data-step>
-  <label class="chk"><input type="checkbox"></label>
+<article class="card" data-step>
+  <a class="thumb" href="https://www.youtube.com/watch?v=k0gmTOm1eus" target="_blank" rel="noopener">
+    <img loading="lazy" src="https://i.ytimg.com/vi/k0gmTOm1eus/maxresdefault.jpg" alt="From PRD to first code">
+    <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+    <span class="vbadge"><span>19K views</span><span>Nov 2025</span></span>
+  </a>
   <div class="body">
-    <h3>A Complete Beginner's Guide: From PRD to Your First Lines of Code</h3>
-    <div class="meta"><span class="tag">How I AI (Claire Vo)</span><span class="tag v">18,000+ views</span><span class="tag">Nov 2025</span></div>
-    <p class="why">Slightly older (~7 months) but evergreen, and the most important watch here. She starts by turning an idea into a one-page plan (a "PRD") with a tool called <b>ChatPRD</b>, then builds the real app in <b>Cursor</b> — and crucially, she keeps telling the AI things like "make it prettier" and "explain what you're doing." That habit — plan first, let the AI narrate — is the exact fix for "I don't know how to prompt." From a former Chief Product Officer; calm and beginner-paced. <em>Heads up: this one's a half-step more technical (it touches a real code editor) — that's intentional, it's where you graduate from "toy" to "real."</em></p>
-    <div class="do"><b>What you'll see:</b> idea → one-page plan → a working app built and restyled by talking to the AI. <b>What to do after:</b> turn your sentence from Step 1 into a 5-bullet plan — what it does, who uses it, the 3 things it must do on day one.</div>
+    <label class="chk"><input type="checkbox"></label>
+    <h3>From PRD to Your First Lines of Code — A Complete Beginner's Guide</h3>
+    <div class="meta"><span class="tag">How I AI · Claire Vo</span><span class="tag v">most important watch</span></div>
+    <p class="why">She turns an idea into a one-page plan (a "PRD") with <b>ChatPRD</b>, then builds the real app in <b>Cursor</b> — and keeps telling the AI "make it prettier," "explain what you're doing." That habit — plan first, let the AI narrate — is the exact fix for "I don't know how to prompt." From a former Chief Product Officer; calm and beginner-paced. <em>Heads up: a half-step more technical (it touches a real code editor) — intentional, it's where you graduate from "toy" to "real."</em></p>
+    <div class="do"><b>What you'll see:</b> idea → one-page plan → a working app built and restyled by talking to the AI. <b>After:</b> turn your Step 1 sentence into a 5-bullet plan — what it does, who uses it, the 3 things it must do on day one.</div>
     <a class="go" href="https://www.youtube.com/watch?v=k0gmTOm1eus" target="_blank" rel="noopener">Watch it →</a>
   </div>
-</div>
+</article>
 
-<!-- PROMPTING RULES -->
+<!-- RULES -->
 <div class="rules">
-  <h2>💬 The 3 rules that fix "I don't know how to prompt"</h2>
-  <p>Print these. Use them in every single session. They're the whole game.</p>
-  <div class="rule"><div class="num">1</div><div><b>Tell it you're a beginner — every time.</b>
-    <span class="ex">"I've never written code. Build this, and explain each step in plain English so I actually understand what's happening."</span></div></div>
-  <div class="rule"><div class="num">2</div><div><b>Start tiny. Add one thing at a time.</b>
-    <span class="ex">Not "build me the whole app." Instead: "First, just a sign-up screen. Once that works, we'll add the next piece."</span></div></div>
-  <div class="rule"><div class="num">3</div><div><b>Write 3 sentences before you open the tool.</b>
-    <span class="ex">What it does, who it's for, what "done" looks like. A good prompt is just a tiny product doc — that's a skill you already have.</span></div></div>
+  <h2>The 3 rules that fix "I don't know how to prompt"</h2>
+  <p>Print these. Use them in every session. They're the whole game.</p>
+  <div class="rule"><div class="num">1</div><div><b>Tell it you're a beginner — every time.</b><span class="ex">"I've never written code. Build this, and explain each step in plain English so I actually understand what's happening."</span></div></div>
+  <div class="rule"><div class="num">2</div><div><b>Start tiny. Add one thing at a time.</b><span class="ex">Not "build me the whole app." Instead: "First, just a sign-up screen. Once that works, we'll add the next piece."</span></div></div>
+  <div class="rule"><div class="num">3</div><div><b>Write 3 sentences before you open the tool.</b><span class="ex">What it does, who it's for, what "done" looks like. A good prompt is just a tiny product doc — a skill you already have.</span></div></div>
 </div>
 
-<!-- STAGE 3 -->
+<!-- STEP 4 -->
 <div class="phase">
-  <div class="lbl">Step 4 · Build for real</div>
-  <h2>Build & ship something this weekend</h2>
+  <span class="lbl">Step 4 · Build for real</span>
+  <h2>Build &amp; ship something this weekend</h2>
   <div class="sub">The full hands-on. Pick a tool, follow along, deploy a live thing.</div>
 </div>
-<div class="card" data-step>
-  <label class="chk"><input type="checkbox"></label>
+<article class="card" data-step>
+  <a class="thumb" href="https://www.youtube.com/watch?v=BpOsHF5Oj_I" target="_blank" rel="noopener">
+    <img loading="lazy" src="https://i.ytimg.com/vi/BpOsHF5Oj_I/maxresdefault.jpg" alt="Vibe coding full course">
+    <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+    <span class="vbadge"><span class="hot">most popular</span><span>76K views</span><span>May 2026</span></span>
+  </a>
   <div class="body">
-    <h3>Vibe Coding for Beginners (Full Course 2026)</h3>
-    <div class="meta"><span class="tag">Riley Brown</span><span class="tag v">76,000+ views</span><span class="tag">May 2026</span><span class="tag">most popular</span></div>
-    <p class="why">The most-watched and most-recent, by the biggest non-technical-founder educator out there. It's chaptered, so do it in chunks: build a web app → add a login and database (Firebase) → add AI features → put it live on the internet (Vercel) → then turn the same app into a desktop and even an iPhone app. It also shows the real superpower — when something breaks, you paste the error to the AI and it fixes itself. <em>Note: it uses Codex, which needs a paid ChatGPT subscription — but the workflow is identical in any of the Step 5 tools.</em></p>
-    <div class="do"><b>What you'll see:</b> a complete build from blank screen → deployed, working app, including how to troubleshoot by feeding errors back to the AI. <b>What to do after:</b> build YOUR thing from Step 3's plan — not the demo. Use the 3 rules. It'll feel messy; that's normal. Keep going.</div>
+    <label class="chk"><input type="checkbox"></label>
+    <h3>Vibe Coding for Beginners — Full Course 2026</h3>
+    <div class="meta"><span class="tag">Riley Brown</span><span class="tag v">chaptered · do it in chunks</span></div>
+    <p class="why">The most-watched and most-recent, by the biggest non-technical-founder educator out there. Build a web app → add a login and database → add AI features → put it live on the internet → then turn the same app into a desktop and even an iPhone app. It also shows the real superpower: when something breaks, you paste the error to the AI and it fixes itself. <em>Note: it uses Codex (needs a paid ChatGPT subscription) — but the workflow is identical in any Step 5 tool.</em></p>
+    <div class="do"><b>What you'll see:</b> a complete build from blank screen → deployed, working app, including troubleshooting by feeding errors back to the AI. <b>After:</b> build YOUR thing from your Step 3 plan — not the demo. Use the 3 rules. It'll feel messy; that's normal. Keep going.</div>
     <a class="go" href="https://www.youtube.com/watch?v=BpOsHF5Oj_I" target="_blank" rel="noopener">Watch it →</a>
   </div>
-</div>
+</article>
 
-<!-- STAGE: tool picker -->
+<!-- STEP 5 -->
 <div class="phase">
-  <div class="lbl">Step 5 · Choose your tool</div>
+  <span class="lbl">Step 5 · Choose your tool</span>
   <h2>Pick one and don't tool-hop</h2>
   <div class="sub">Watch only when you're deciding where to build. Then commit.</div>
 </div>
-<div class="card" data-step>
-  <label class="chk"><input type="checkbox"></label>
+<article class="card" data-step>
+  <a class="thumb" href="https://www.youtube.com/watch?v=OZOokCf2R_4" target="_blank" rel="noopener">
+    <img loading="lazy" src="https://i.ytimg.com/vi/OZOokCf2R_4/maxresdefault.jpg" alt="Ranking AI app builders">
+    <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+    <span class="vbadge"><span>53K views</span><span>Jan 2026</span></span>
+  </a>
   <div class="body">
+    <label class="chk"><input type="checkbox"></label>
     <h3>I Ranked Every AI App Builder: Lovable vs Bolt vs Replit vs Cursor</h3>
-    <div class="meta"><span class="tag">Build Great Products</span><span class="tag v">52,000+ views</span><span class="tag">Jan 2026</span></div>
-    <p class="why">Stops the #1 beginner time-sink: tool-hopping instead of building. A product designer ranks the tools S-to-D by what you're making — business app, mobile app, simple site, complex app — so you pick once and commit. (The big 2026 unlock he points to: models like Claude Opus 4.5 and Gemini 3 now make these tools genuinely good.)</p>
+    <div class="meta"><span class="tag">Build Great Products</span></div>
+    <p class="why">Stops the #1 beginner time-sink: tool-hopping instead of building. A product designer ranks the tools S-to-D by what you're making, so you pick once and commit. (His big 2026 point: models like Claude Opus 4.5 and Gemini 3 now make these tools genuinely good.)</p>
     <div class="do"><b>The short version, if you want to skip the video:</b></div>
     <div class="tools">
-      <div class="tool"><b>Bolt or Lovable</b> — <span>the easy entry points. Type what you want, get a working web app in minutes. Lovable's output looks the nicest. Start here.</span></div>
+      <div class="tool"><b>Bolt or Lovable</b> — <span>the easy entry points. Type what you want, get a working web app in minutes. Lovable's output looks nicest. Start here.</span></div>
       <div class="tool"><b>Replit</b> — <span>the best <em>teacher</em>; shows what's happening under the hood while staying beginner-friendly. Pick this if you want to learn, not just generate.</span></div>
-      <div class="tool"><b>Cursor + Claude Code</b> — <span>the most powerful combo for bigger, more complex apps. Steeper — save it for once you're past the first hump.</span></div>
+      <div class="tool"><b>Cursor + Claude Code</b> — <span>the most powerful combo for bigger, complex apps. Steeper — save it for once you're past the first hump.</span></div>
     </div>
-    <p class="why" style="margin-top:14px">Don't worry that the earlier videos each used a different tool — the <em>skill</em> (describe → build → fix) is identical everywhere. Pick one from this list and stick with it for your first build.</p>
+    <p class="why" style="margin-top:14px">Don't worry that the videos each used a different tool — the <em>skill</em> (describe → build → fix) is identical everywhere. Pick one and stick with it for your first build.</p>
     <a class="go" href="https://www.youtube.com/watch?v=OZOokCf2R_4" target="_blank" rel="noopener">Watch it →</a>
   </div>
-</div>
+</article>
 
 <!-- CHINESE -->
 <div class="phase">
-  <div class="lbl">中文资源 · Chinese resources</div>
-  <h2>真实案例：一个不会写代码的人，做出了爆款 App</h2>
-  <div class="sub">If reading in Chinese is easier — start here. This story alone is worth the whole page.</div>
+  <span class="lbl">中文资源 · Chinese resources</span>
+  <h2>真实案例：不会写代码，做出了爆款 App</h2>
+  <div class="sub">If reading in Chinese is easier — this story alone is worth the whole page.</div>
 </div>
-<div class="card" data-step style="border-color:#3a4252;background:linear-gradient(160deg,#1d2330,#181b22)">
-  <label class="chk"><input type="checkbox"></label>
+<article class="card" data-step>
+  <div class="banner" style="background:linear-gradient(120deg,rgba(255,206,106,.16),rgba(255,143,177,.08))"><span class="ico">🐱</span><div><div class="bt" style="color:var(--gold)">⭐ 真实案例 · Real story</div><div style="color:var(--mut);font-size:14px">App Store 摄影榜 Top 20 · 11万+ 下载 · 零编程</div></div></div>
   <div class="body">
+    <label class="chk"><input type="checkbox"></label>
     <h3>「小猫补光灯」— 陈云飞的故事</h3>
-    <div class="meta"><span class="tag">真实案例</span><span class="tag v">App Store 摄影榜 Top 20</span><span class="tag">11万+ 下载</span></div>
-    <p class="why">陈云飞是大厂管理层裸辞后转型的自媒体博主，<b>完全不会编程</b>。他用 <b>Cursor</b>，靠"用大白话把需求讲清楚"——比如"色卡要用圆角矩形，不要圆形"——让 AI 写完全部代码，约 <b>1.5 小时</b>做出并上架了一款补光 App，迅速冲进苹果商店摄影分类前 20，下载量破 11 万。他的核心打法：<b>从用户角度想问题 + 在社交平台收集反馈 + 不断让 AI 迭代</b>。不会写代码，从来不是做产品的门槛。</p>
+    <div class="meta"><span class="tag ch">独立开发</span><span class="tag ch">Cursor</span></div>
+    <p class="why">陈云飞是大厂管理层裸辞后转型的自媒体博主，<b>完全不会编程</b>。他用 <b>Cursor</b>，靠"用大白话把需求讲清楚"——比如"色卡要用圆角矩形，不要圆形"——让 AI 写完全部代码，约 <b>1.5 小时</b>做出并上架了一款补光 App，迅速冲进苹果商店摄影分类前 20，下载量破 11 万。核心打法：<b>从用户角度想问题 + 在社交平台收集反馈 + 不断让 AI 迭代</b>。不会写代码，从来不是做产品的门槛。</p>
     <div class="do"><b>给 Kai 的一句话：</b> 他做到的，你也能做到——你缺的不是技术合伙人，是开始的那一下。<b>看完后:</b> 别纠结技术，先想清楚"谁会用、解决什么具体痛点"。</div>
     <a class="go" href="https://www.sohu.com/a/830224819_121924584" target="_blank" rel="noopener">读这个故事 →</a>
   </div>
-</div>
+</article>
 <ul class="ref">
-  <li><b>知乎 · 十问爆款「小猫补光灯」</b> — 对陈云飞的深度访谈：不会代码的独立开发者，除了 Cursor 还该会什么。 <a href="https://zhuanlan.zhihu.com/p/13642691776" target="_blank" rel="noopener">知乎专栏</a></li>
-  <li><b>36氪 · 非技术 PM 从 0 到 1 做出产品的 AI 工作流</b> — 一套可复制的方法论：从对话式 AI 理清思路，到逐步引入工具执行。 <a href="https://36kr.com/p/3647020340785672" target="_blank" rel="noopener">36氪</a></li>
-  <li><b>少数派 · 设计师借助 AI 独立完成浏览器插件</b> — 另一个"非工程师从写代码到上架"的完整记录。 <a href="https://sspai.com/post/94949" target="_blank" rel="noopener">少数派</a></li>
-  <li><span style="color:var(--mut)">💡 在<b>小红书</b>搜「AI 编程」「独立开发」「Cursor 教程」「vibe coding」能找到大量中文实操笔记——很多独立开发者都在那里冷启动。</span></li>
+  <li><b>知乎 · 十问爆款「小猫补光灯」</b> — 对陈云飞的深度访谈：不会代码的独立开发者，除了 Cursor 还该会什么。 <a href="https://zhuanlan.zhihu.com/p/13642691776" target="_blank" rel="noopener">知乎专栏 →</a></li>
+  <li><b>36氪 · 非技术 PM 从 0 到 1 做出产品的 AI 工作流</b> — 一套可复制的方法论。 <a href="https://36kr.com/p/3647020340785672" target="_blank" rel="noopener">36氪 →</a></li>
+  <li><b>少数派 · 设计师借助 AI 独立完成浏览器插件</b> — 另一个"非工程师从写代码到上架"的完整记录。 <a href="https://sspai.com/post/94949" target="_blank" rel="noopener">少数派 →</a></li>
+  <li>💡 在<b>小红书</b>搜「AI 编程」「独立开发」「Cursor 教程」「vibe coding」能找到大量中文实操笔记——很多独立开发者都在那里冷启动。</li>
 </ul>
 
 <!-- REFERENCE -->
 <div class="phase">
-  <div class="lbl">Keep nearby</div>
+  <span class="lbl">Keep nearby</span>
   <h2>📚 Reference shelf</h2>
-  <div class="sub">Dip in when you need it. Don't read end-to-end — these are for when you're stuck or curious.</div>
+  <div class="sub">Dip in when stuck or curious — don't read end-to-end.</div>
 </div>
 <ul class="ref">
-  <li><b>r/vibecoding</b> — 89,000-member community of people exactly where you are. Search before you panic; someone's hit your error already. <a href="https://www.reddit.com/r/vibecoding/" target="_blank" rel="noopener">reddit.com/r/vibecoding</a></li>
-  <li><b>The community's hard-won lessons</b> — the advice that comes up over and over: write a spec first, save your work often, pick your tool by how complex the project will eventually get. <a href="https://www.aitooldiscovery.com/guides/vibe-coding-reddit" target="_blank" rel="noopener">Read the distilled version</a></li>
-  <li><b>Riley Brown's free "Vibecoding 101" PDF</b> — a printable cheat-sheet companion to the course. <a href="https://maven.com/p/ecbf0c" target="_blank" rel="noopener">Grab it</a></li>
-  <li><b>"Shipping an MVP in 48 hours" (Medium, 2026)</b> — a no-fluff written blueprint if you'd rather read than watch. <a href="https://medium.com/@Travel4Fun4U/stop-coding-from-scratch-in-2026-how-non-tech-founders-are-shipping-mvps-in-48-hours-with-ai-33b489d7b671" target="_blank" rel="noopener">Read it</a></li>
+  <li><b>r/vibecoding</b> — 89,000-member community of people exactly where you are. Search before you panic; someone's hit your error already. <a href="https://www.reddit.com/r/vibecoding/" target="_blank" rel="noopener">reddit.com/r/vibecoding →</a></li>
+  <li><b>The community's hard-won lessons</b> — write a spec first, save your work often, pick your tool by how complex the project will eventually get. <a href="https://www.aitooldiscovery.com/guides/vibe-coding-reddit" target="_blank" rel="noopener">Read the distilled version →</a></li>
+  <li><b>Riley Brown's free "Vibecoding 101" PDF</b> — a printable cheat-sheet companion to the course. <a href="https://maven.com/p/ecbf0c" target="_blank" rel="noopener">Grab it →</a></li>
+  <li><b>"Shipping an MVP in 48 hours" (Medium, 2026)</b> — a no-fluff written blueprint if you'd rather read than watch. <a href="https://medium.com/@Travel4Fun4U/stop-coding-from-scratch-in-2026-how-non-tech-founders-are-shipping-mvps-in-48-hours-with-ai-33b489d7b671" target="_blank" rel="noopener">Read it →</a></li>
 </ul>
 
 <footer>
   <p><strong>When you get stuck — and you will — that's not a sign you can't do this.</strong> It's the exact moment every builder hits. Paste the error back to the AI, tell it you're a beginner, ask it to explain and fix. That loop <em>is</em> the skill.</p>
-  <p>Kai — you've been waiting on someone else to build your idea. You don't have to anymore. Start with Step 1. 🚀</p>
+  <p>Kai — you've been waiting on someone else to build your idea. You don't have to anymore. Start at the top. 🚀</p>
   <div class="sig">Put together for Kai — who's closer than he thinks.</div>
 </footer>
 </div>
 
 <script>
   var boxes=[].slice.call(document.querySelectorAll('.card[data-step] input'));
-  var KEY='build-with-ai-progress-v1';
+  var KEY='kai-build-progress-v2';
   function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
   function save(){localStorage.setItem(KEY,JSON.stringify(boxes.map(function(b){return b.checked})))}
   function paint(){
-    var n=boxes.filter(function(b){return b.checked}).length;
+    var n=boxes.filter(function(b){return b.checked}).length,t=document.getElementById('ptext');
     document.getElementById('barfill').style.width=(n/boxes.length*100)+'%';
-    var t=document.getElementById('ptext');
-    if(n===0)t.textContent='0 of '+boxes.length+' steps done — your move.';
+    if(n===0)t.textContent='0 of '+boxes.length+' done — your move, Kai.';
     else if(n===boxes.length)t.textContent='All '+boxes.length+' done. Now go build YOUR thing. 🚀';
-    else t.textContent=n+' of '+boxes.length+' steps done — keep going.';
+    else t.textContent=n+' of '+boxes.length+' done — keep going, Kai.';
     boxes.forEach(function(b){b.closest('.card').classList.toggle('done',b.checked)});
   }
-  var saved=load();
-  boxes.forEach(function(b,i){b.checked=!!saved[i];b.addEventListener('change',function(){save();paint()})});
-  paint();
+  var s=load();boxes.forEach(function(b,i){b.checked=!!s[i];b.addEventListener('change',function(){save();paint()})});paint();
 </script>
 </body>
 </html>
