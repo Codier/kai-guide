@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kai — You Don't Need a Technical Co-Founder. You Need a Weekend.</title>
+<title>Kai — 你不需要技术合伙人，只需要一个周末</title>
 <style>
   :root{
     --bg:#0b0d12; --bg2:#10131a; --card:#161a22; --card2:#1d222c; --line:#2a3140;
@@ -14,7 +14,7 @@
   html{scroll-behavior:smooth}
   body{
     margin:0;background:var(--bg);color:var(--ink);
-    font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font:16px/1.8 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;
     background-image:radial-gradient(900px 500px at 80% -10%,rgba(109,155,255,.16),transparent 60%),radial-gradient(700px 420px at 0% 5%,rgba(95,240,192,.10),transparent 55%);
     background-attachment:fixed;
@@ -23,94 +23,73 @@
   a{color:var(--acc)}
   a:hover{text-decoration:none}
 
-  /* progress */
-  .progress{position:sticky;top:0;z-index:20;background:rgba(11,13,18,.82);backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);padding:11px 0}
+  .progress{position:sticky;top:0;z-index:20;background:rgba(11,13,18,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:11px 0}
   .bar{height:7px;background:var(--card2);border-radius:999px;overflow:hidden}
   .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .45s cubic-bezier(.2,.8,.2,1)}
   .ptext{font-size:12.5px;color:var(--mut);margin-top:6px;text-align:center;letter-spacing:.02em}
 
-  /* hero */
   header{padding:72px 0 30px;text-align:center}
-  .kicker{display:inline-block;color:var(--acc2);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px;
-    border:1px solid rgba(95,240,192,.3);border-radius:999px;padding:6px 14px;margin-bottom:22px;background:rgba(95,240,192,.06)}
-  h1{font-size:44px;line-height:1.1;margin:0 0 18px;letter-spacing:-.025em;font-weight:800}
+  .kicker{display:inline-block;color:var(--acc2);font-weight:700;letter-spacing:.08em;font-size:12.5px;border:1px solid rgba(95,240,192,.3);border-radius:999px;padding:6px 14px;margin-bottom:22px;background:rgba(95,240,192,.06)}
+  h1{font-size:42px;line-height:1.18;margin:0 0 18px;letter-spacing:-.01em;font-weight:800}
   .grad{background:linear-gradient(95deg,var(--acc),var(--acc2) 70%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .lede{font-size:19px;color:var(--mut);max-width:640px;margin:0 auto;line-height:1.6}
+  .lede{font-size:18.5px;color:var(--mut);max-width:660px;margin:0 auto;line-height:1.7}
   .pill{display:inline-flex;align-items:center;gap:8px;margin-top:26px;padding:9px 18px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--mut);background:var(--bg2)}
 
-  /* pep */
   .pep{position:relative;background:linear-gradient(165deg,#1a2433,#13171f);border:1px solid var(--line);border-radius:20px;padding:28px 30px;margin:14px 0 18px;overflow:hidden}
   .pep::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--acc),var(--acc2))}
   .pep p{margin:0 0 13px}.pep p:last-child{margin:0}
   .pep strong{color:#fff}
 
-  /* china alert */
   .alert{background:linear-gradient(160deg,#2a2113,#1c1810);border:1px solid #5a4a22;border-radius:18px;padding:20px 24px;margin:0 0 18px}
   .alert .ahd{font-weight:800;font-size:16px;color:var(--gold);margin-bottom:8px}
   .alert p{margin:0;color:#d8cdb4;font-size:14.5px}
   .alert b{color:#fff}.alert a{color:var(--gold)}
 
-  /* phase heading */
   .phase{margin:54px 0 6px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-  .phase .lbl{color:var(--acc2);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-    background:rgba(95,240,192,.08);border:1px solid rgba(95,240,192,.22);border-radius:999px;padding:5px 12px;white-space:nowrap}
-  .phase h2{font-size:27px;margin:10px 0 2px;letter-spacing:-.02em;width:100%;font-weight:800}
+  .phase .lbl{color:var(--acc2);font-size:12px;font-weight:800;letter-spacing:.05em;background:rgba(95,240,192,.08);border:1px solid rgba(95,240,192,.22);border-radius:999px;padding:5px 12px;white-space:nowrap}
+  .phase h2{font-size:26px;margin:10px 0 2px;letter-spacing:-.01em;width:100%;font-weight:800}
   .phase .sub{color:var(--mut);font-size:15.5px;width:100%}
 
-  /* card */
-  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;margin:18px 0;overflow:hidden;
-    transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;margin:18px 0;overflow:hidden;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
   .card:hover{transform:translateY(-3px);border-color:#3b4658;box-shadow:0 18px 40px -20px rgba(0,0,0,.7)}
   .card.done{opacity:.55}
   .card.done .thumb img{filter:grayscale(.6)}
 
-  /* thumbnail */
   .thumb{display:block;position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;border-bottom:1px solid var(--line)}
   .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
   .card:hover .thumb img{transform:scale(1.045)}
   .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,10,14,.78))}
-  .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;
-    background:rgba(13,16,22,.55);backdrop-filter:blur(3px);border:2px solid rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;
-    z-index:2;transition:.2s}
+  .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(13,16,22,.55);backdrop-filter:blur(3px);border:2px solid rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;z-index:2;transition:.2s}
   .play svg{width:26px;height:26px;margin-left:3px;fill:#fff}
   .card:hover .play{background:var(--acc);border-color:var(--acc);transform:translate(-50%,-50%) scale(1.08)}
   .vbadge{position:absolute;left:14px;bottom:12px;z-index:2;display:flex;gap:6px;flex-wrap:wrap}
-  .vbadge span{font-size:11.5px;font-weight:600;color:#eaf0ff;background:rgba(10,13,20,.66);backdrop-filter:blur(4px);
-    border:1px solid rgba(255,255,255,.14);border-radius:7px;padding:3px 9px}
+  .vbadge span{font-size:11.5px;font-weight:600;color:#eaf0ff;background:rgba(10,13,20,.66);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.14);border-radius:7px;padding:3px 9px}
   .vbadge .hot{color:#0a0c10;background:var(--acc2);border-color:var(--acc2)}
 
-  /* banner (non-video cards) */
-  .banner{display:flex;align-items:center;gap:16px;padding:22px 24px;border-bottom:1px solid var(--line);
-    background:linear-gradient(120deg,rgba(109,155,255,.14),rgba(95,240,192,.07))}
+  .banner{display:flex;align-items:center;gap:16px;padding:22px 24px;border-bottom:1px solid var(--line);background:linear-gradient(120deg,rgba(109,155,255,.14),rgba(95,240,192,.07))}
   .banner .ico{font-size:34px;line-height:1;filter:drop-shadow(0 3px 8px rgba(0,0,0,.4))}
-  .banner .bt{font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2)}
+  .banner .bt{font-weight:800;font-size:13px;letter-spacing:.04em;color:var(--acc2)}
 
-  /* card body */
   .body{padding:20px 24px 24px;position:relative}
-  .body h3{margin:0 30px 10px 0;font-size:19px;line-height:1.3;font-weight:750}
+  .body h3{margin:0 30px 10px 0;font-size:19px;line-height:1.4;font-weight:750}
   .meta{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px}
   .tag{font-size:12px;color:var(--mut);background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
   .tag.v{color:var(--acc2);border-color:rgba(95,240,192,.25)}
   .tag.ch{color:var(--gold);border-color:rgba(255,206,106,.25)}
-  .why{color:#c3ccdb;font-size:14.5px;margin:0 0 14px;padding-left:14px;border-left:3px solid var(--acc)}
+  .why{color:#c3ccdb;font-size:14.5px;margin:0 0 14px;padding-left:14px;border-left:3px solid var(--acc);line-height:1.85}
   .why b{color:#fff}
-  .do{font-size:14px;margin:0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .do{font-size:14px;margin:0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;line-height:1.85}
   .do b{color:var(--acc2)}
-  .go{display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:linear-gradient(95deg,var(--acc),#8aa8ff);color:#0a0c10;font-weight:700;
-    padding:10px 18px;border-radius:11px;font-size:14px;text-decoration:none}
+  .go{display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:linear-gradient(95deg,var(--acc),#8aa8ff);color:#0a0c10;font-weight:700;padding:10px 18px;border-radius:11px;font-size:14px;text-decoration:none}
   .go:hover{filter:brightness(1.08);transform:translateY(-1px)}
 
-  /* done toggle */
   .chk{position:absolute;top:16px;right:16px;z-index:3}
-  .chk input{appearance:none;-webkit-appearance:none;width:30px;height:30px;border:2px solid var(--line);border-radius:9px;cursor:pointer;
-    background:rgba(13,16,22,.6);backdrop-filter:blur(4px);position:relative;transition:.15s}
+  .chk input{appearance:none;-webkit-appearance:none;width:30px;height:30px;border:2px solid var(--line);border-radius:9px;cursor:pointer;background:rgba(13,16,22,.6);backdrop-filter:blur(4px);position:relative;transition:.15s}
   .chk input:hover{border-color:var(--acc2)}
   .chk input:checked{background:var(--acc2);border-color:var(--acc2)}
   .chk input:checked::after{content:"";position:absolute;left:9px;top:4px;width:7px;height:13px;border:solid #0a0c10;border-width:0 3px 3px 0;transform:rotate(45deg)}
   .body>.chk{top:18px;right:18px}
 
-  /* rules */
   .rules{position:relative;background:linear-gradient(160deg,#1b2a30,#14222b);border:1px solid #2f4a52;border-radius:20px;padding:28px;margin:34px 0;overflow:hidden}
   .rules::before{content:"💬";position:absolute;right:-10px;top:-18px;font-size:120px;opacity:.06}
   .rules h2{margin:0 0 6px;font-size:23px}
@@ -118,33 +97,30 @@
   .rule{display:flex;gap:15px;margin:16px 0}
   .num{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--acc2),#9af5d5);color:#06251c;font-weight:800;display:flex;align-items:center;justify-content:center}
   .rule b{color:#fff}
-  .rule .ex{display:block;margin-top:6px;color:var(--mut);font-size:14px;font-style:italic;border-left:2px solid var(--acc2);padding-left:11px}
+  .rule .ex{display:block;margin-top:6px;color:var(--mut);font-size:14px;border-left:2px solid var(--acc2);padding-left:11px}
 
-  /* tools */
   .tools{display:grid;gap:11px;margin:14px 0}
-  .tool{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:15px 17px}
+  .tool{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:15px 17px;line-height:1.8}
   .tool b{color:var(--acc2)}.tool span{color:var(--mut);font-size:14px}
 
-  /* mapping table */
   .map{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
-  .map th{text-align:left;padding:9px 12px;color:var(--mut);font-weight:800;border-bottom:1px solid var(--line);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}
+  .map th{text-align:left;padding:9px 12px;color:var(--mut);font-weight:800;border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.03em}
   .map td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;width:50%}
   .map tr:last-child td{border-bottom:none}
   .map .w{color:#c3ccdb}
   .map .c{color:var(--acc2);font-weight:650}
-  .map td small{color:var(--dim);display:block;font-weight:400;margin-top:3px;font-size:12.5px}
+  .map td small{color:var(--dim);display:block;font-weight:400;margin-top:3px;font-size:12.5px;line-height:1.6}
 
-  /* reference */
   .ref{list-style:none;padding:0;margin:16px 0}
-  .ref li{margin:0 0 11px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:14.5px}
+  .ref li{margin:0 0 11px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:14.5px;line-height:1.8}
   .ref li b{color:var(--ink)}
 
-  footer{margin-top:58px;text-align:center;color:var(--mut);font-size:15px;border-top:1px solid var(--line);padding-top:34px}
+  footer{margin-top:58px;text-align:center;color:var(--mut);font-size:15px;border-top:1px solid var(--line);padding-top:34px;line-height:1.9}
   footer strong{color:#fff}
   .sig{margin-top:20px;font-size:13px;color:var(--dim)}
 
   @media(max-width:560px){
-    h1{font-size:32px}.lede{font-size:17px}
+    h1{font-size:30px}.lede{font-size:16.5px}
     .body{padding:18px}.banner{padding:18px}
     .play{width:54px;height:54px}.play svg{width:22px;height:22px}
   }
@@ -153,206 +129,206 @@
 <body>
 <div class="progress"><div class="wrap" style="padding-bottom:0">
   <div class="bar"><i id="barfill"></i></div>
-  <div class="ptext" id="ptext">0 of 7 done — your move, Kai.</div>
+  <div class="ptext" id="ptext">还没开始 — 该你了，Kai。</div>
 </div></div>
 
 <div class="wrap">
 <header>
-  <div class="kicker">For Kai · a starting line, not a syllabus</div>
-  <h1>You don't need a technical co-founder.<br><span class="grad">You need a weekend.</span></h1>
-  <p class="lede">The thing between you and a working product isn't a missing engineer anymore — it's knowing what to learn, in what order. Here's that order.</p>
-  <div class="pill">⏱️ ~3 hours of watching · something real built by Sunday</div>
+  <div class="kicker">给 Kai · 这是起跑线，不是教学大纲</div>
+  <h1>你不需要技术合伙人。<br><span class="grad">你只需要一个周末。</span></h1>
+  <p class="lede">横在你和"能用的产品"之间的，早就不是缺一个工程师了——而是不知道该按什么顺序学什么。这份清单，就是那个顺序。</p>
+  <div class="pill">⏱️ 约 3 小时视频 · 这个周末就能做出真东西</div>
 </header>
 
 <div class="pep">
-  <p>Kai — you've spent months hunting for someone to write the code, and not finding them has been genuinely frustrating. Here's the reframe that changes everything:</p>
-  <p><strong>Your job was never to write code. It's to describe — clearly and specifically — what you want built.</strong> The AI writes the code. People with zero programming background are shipping real apps with paying customers right now. They're not smarter than you — they just learned to <em>talk</em> to the tools.</p>
-  <p>This page takes you from "I've never written a line of code" to "I built and deployed a thing" — light at first, deeper as your confidence grows. Tick each box as you go. The order is the point — don't skip ahead.</p>
+  <p>Kai——你花了好几个月找人写代码，找不到，确实让人沮丧。但有一个认知能改变一切：</p>
+  <p><strong>你的工作从来都不是写代码，而是把你想要的东西讲清楚、讲具体。</strong>代码交给 AI 写。现在一大批零编程背景的人，正在做出有付费用户的真实产品——他们不比你聪明，只是学会了怎么"跟工具对话"。</p>
+  <p>这份指南带你从"我一行代码都没写过"，走到"我做出并上线了一个东西"——先轻松，再随着信心一步步加深。每完成一项就打个勾。顺序很重要，别跳着看。</p>
 </div>
 
 <div class="alert">
-  <div class="ahd">🇨🇳 Building for Chinese users? Read this first</div>
-  <p>The English videos below are the best way to learn <em>the method</em> — describe, build, fix. But their <b>tools won't work well in China</b>: Firebase is blocked, Vercel is slow, Supabase lags. <b>Watch them for the skill, not the stack.</b> When you actually build for Chinese users, follow the <a href="#china">🇨🇳 Building for China</a> section below — it has a <b>Western→China service cheat-sheet</b> so you can follow any English tutorial and just swap in the right domestic tool (WeChat Mini Program + 腾讯云 CloudBase + a local AI tool). Same skill, right plumbing.</p>
+  <div class="ahd">🇨🇳 给中国用户做产品？先看这一条</div>
+  <p>下面的英文视频是学"方法"的最佳途径——描述、生成、修复。但它们用的工具在国内并不好使：Firebase 被墙、Vercel 很慢、Supabase 卡。<b>看它们学方法，别照搬技术栈。</b>真正动手给中国用户做时，照下面 <a href="#china">🇨🇳 给中国用户做产品</a> 这一节走——里面有一张<b>「西方 → 中国」服务对照表</b>，你可以跟着任何英文教程做，只要把工具换成对应的国内方案（微信小程序 + 腾讯云 CloudBase + 国产 AI 工具）。方法一样，把管道换对就行。</p>
 </div>
 
-<!-- INSPIRATION -->
+<!-- 激励 -->
 <div class="phase">
-  <span class="lbl">Optional · watch if you need belief first</span>
-  <h2>Proof, before the how-to</h2>
-  <div class="sub">If part of you still doesn't buy it, start here — a real person, no code, real success.</div>
+  <span class="lbl">选看 · 还不太信就先看这个</span>
+  <h2>先看证据，再谈怎么做</h2>
+  <div class="sub">如果心里还有点怀疑，从这里开始——一个真实的人，不会写代码，做成了。</div>
 </div>
 <article class="card" data-step>
   <a class="thumb" href="https://youtu.be/BxEf3RqIHkw" target="_blank" rel="noopener">
-    <img loading="lazy" src="https://i.ytimg.com/vi/BxEf3RqIHkw/maxresdefault.jpg" alt="Matt Van Horn interview">
+    <img loading="lazy" src="https://i.ytimg.com/vi/BxEf3RqIHkw/maxresdefault.jpg" alt="Matt Van Horn 访谈">
     <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-    <span class="vbadge"><span class="hot">⭐ Real story</span><span>55K views</span><span>Jun 2026 · brand new</span></span>
+    <span class="vbadge"><span class="hot">⭐ 真实故事</span><span>5.5 万次观看</span><span>2026年6月 · 最新</span></span>
   </a>
   <div class="body">
     <label class="chk"><input type="checkbox"></label>
-    <h3>A Non-Technical Founder Who Became an Open-Source Legend — Matt Van Horn</h3>
-    <div class="meta"><span class="tag">Interview · inspiration</span></div>
-    <p class="why">Matt has no CS degree, doesn't write code — and by his own admission <b>doesn't even read the code the AI writes</b>. Yet he's shipped tools that hit #1 trending on GitHub (40,000+ stars). His whole method: give an AI simple commands ("plan this," "build this"), trust the system, iterate fast. If you ever think "I'm not technical enough" — he's living proof the opposite is now true.</p>
-    <div class="do"><b>Takeaway for you, Kai:</b> the people winning at this aren't the ones who learned to code — they're the ones who started, described what they wanted, and kept going. That can be you.</div>
-    <a class="go" href="https://youtu.be/BxEf3RqIHkw" target="_blank" rel="noopener">Watch it →</a>
+    <h3>一个不会写代码的创始人，如何成了开源传奇 — Matt Van Horn</h3>
+    <div class="meta"><span class="tag">访谈 · 激励</span></div>
+    <p class="why">Matt 没有计算机学位，不写代码——他自己说<b>连 AI 写出来的代码都不看</b>。可他做出的工具冲上了 GitHub 趋势榜第一（4 万+ star）。他的全部方法就是：给 AI 下简单指令（"规划一下""开始做"），信任系统，快速迭代。如果你也觉得"我没那个技术底子"——他就是活生生的反例。</p>
+    <div class="do"><b>给你的一句话，Kai：</b>在这件事上赢的人，不是那些去学了编程的人，而是那些开始动手、把需求讲清楚、然后一直做下去的人。那个人可以是你。</div>
+    <a class="go" href="https://youtu.be/BxEf3RqIHkw" target="_blank" rel="noopener">去看 →</a>
   </div>
 </article>
 
-<!-- STEP 1 -->
+<!-- 第1步 -->
 <div class="phase">
-  <span class="lbl">Step 1 · Mindset</span>
-  <h2>Believe it's actually possible</h2>
-  <div class="sub">Before any tool. Five minutes of reading to kill the hesitation.</div>
+  <span class="lbl">第 1 步 · 心态</span>
+  <h2>先相信这事真的能成</h2>
+  <div class="sub">在碰任何工具之前。花五分钟读一读，打消犹豫。</div>
 </div>
 <article class="card" data-step>
-  <div class="banner"><span class="ico">🧠</span><div><div class="bt">Read · ~8 min</div><div style="color:var(--mut);font-size:14px">Set the right expectations before you touch a tool</div></div></div>
+  <div class="banner"><span class="ico">🧠</span><div><div class="bt">阅读 · 约 8 分钟</div><div style="color:var(--mut);font-size:14px">动手前，先把预期摆正</div></div></div>
   <div class="body">
     <label class="chk"><input type="checkbox"></label>
-    <h3>The Non-Technical Founder's Guide to Building AI Products</h3>
-    <p class="why">Read just the opening + the "vibe coding reality" section. It separates hype from what's genuinely true now — so you start with realistic confidence, not fear or fantasy.</p>
-    <div class="do"><b>What to do after:</b> write one sentence — "I want to build ____ so that ____ can ____." That sentence is your starting spec.</div>
-    <a class="go" href="https://www.aibuilderclub.io/blog/non-technical-founder-ai-guide" target="_blank" rel="noopener">Read it →</a>
+    <h3>非技术创始人的 AI 产品搭建指南（英文）</h3>
+    <p class="why">只读开头 + "vibe coding 的现实"那一节。它把炒作和"现在真正能做到的"分开——让你带着务实的信心起步，而不是恐惧或幻想。</p>
+    <div class="do"><b>看完后：</b>写一句话——"我想做 ____，让 ____ 能够 ____。"这句话，就是你最初的需求说明。</div>
+    <a class="go" href="https://www.aibuilderclub.io/blog/non-technical-founder-ai-guide" target="_blank" rel="noopener">去读 →</a>
   </div>
 </article>
 
-<!-- STEP 2 -->
+<!-- 第2步 -->
 <div class="phase">
-  <span class="lbl">Step 2 · See it work</span>
-  <h2>Watch a non-coder build, start to finish</h2>
-  <div class="sub">The "oh — I could actually do this" moment. Lightest video here.</div>
+  <span class="lbl">第 2 步 · 先看它跑起来</span>
+  <h2>看一个不会写代码的人，从头做完一个东西</h2>
+  <div class="sub">那个"哦——原来我也能做"的瞬间。这是全页最轻松的视频。</div>
 </div>
 <article class="card" data-step>
   <a class="thumb" href="https://www.youtube.com/watch?v=Q_FZ800Hm4g" target="_blank" rel="noopener">
-    <img loading="lazy" src="https://i.ytimg.com/vi/Q_FZ800Hm4g/maxresdefault.jpg" alt="Vibe coding step by step">
+    <img loading="lazy" src="https://i.ytimg.com/vi/Q_FZ800Hm4g/maxresdefault.jpg" alt="vibe coding 入门">
     <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-    <span class="vbadge"><span>44K views</span><span>Mar 2026</span></span>
+    <span class="vbadge"><span>4.4 万次观看</span><span>2026年3月</span></span>
   </a>
   <div class="body">
     <label class="chk"><input type="checkbox"></label>
-    <h3>Vibe Coding Tutorial for Beginners 2026: Step by Step</h3>
-    <div class="meta"><span class="tag">Mikey No Code</span><span class="tag v">gentlest on-ramp</span></div>
-    <p class="why">No setup, no install — just typing. He builds a working <b>habit-tracker app from a single sentence</b>, then adds dark mode and notes just by asking. Later he spins up a paid tool with Stripe payments and a Trello-style board — all in plain English (tool: Base44). A little promotional, but perfect for the "wait, that's it?" moment.</p>
-    <div class="do"><b>What you'll see:</b> the whole loop — describe → AI builds it → "now add X" → it updates. No code touched. <b>After:</b> nothing yet. Just let it sink in that this is normal and doable.</div>
-    <a class="go" href="https://www.youtube.com/watch?v=Q_FZ800Hm4g" target="_blank" rel="noopener">Watch it →</a>
+    <h3>Vibe Coding Tutorial for Beginners 2026: Step by Step（英文）</h3>
+    <div class="meta"><span class="tag">Mikey No Code</span><span class="tag v">最温柔的入门</span></div>
+    <p class="why">不用装环境、不用配置，纯打字。他用一句话做出一个能用的<b>习惯打卡 App</b>，再靠对话加上暗色模式和笔记。后面还做了带 Stripe 支付的付费工具和类似 Trello 的看板——全程大白话（工具：Base44）。有点带货，但最适合那个"就这？！"的开窍时刻。</p>
+    <div class="do"><b>你会看到：</b>完整的循环——描述 → AI 做出来 → "再加个 X" → 它就更新了，全程没碰代码。<b>看完后：</b>先别急着动手，让"这很正常、我也能做"这件事沉淀一下。</div>
+    <a class="go" href="https://www.youtube.com/watch?v=Q_FZ800Hm4g" target="_blank" rel="noopener">去看 →</a>
   </div>
 </article>
 
-<!-- STEP 3 -->
+<!-- 第3步 -->
 <div class="phase">
-  <span class="lbl">Step 3 · The real skill</span>
-  <h2>Learn to write it down first</h2>
-  <div class="sub">The unlock — the difference between people who ship and people who spin.</div>
+  <span class="lbl">第 3 步 · 真正的关键技能</span>
+  <h2>学会"先把它写下来"</h2>
+  <div class="sub">这就是那个开关——会做和瞎忙的分水岭。</div>
 </div>
 <article class="card" data-step>
   <a class="thumb" href="https://www.youtube.com/watch?v=k0gmTOm1eus" target="_blank" rel="noopener">
-    <img loading="lazy" src="https://i.ytimg.com/vi/k0gmTOm1eus/maxresdefault.jpg" alt="From PRD to first code">
+    <img loading="lazy" src="https://i.ytimg.com/vi/k0gmTOm1eus/maxresdefault.jpg" alt="从 PRD 到第一行代码">
     <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-    <span class="vbadge"><span>19K views</span><span>Nov 2025</span></span>
+    <span class="vbadge"><span>1.9 万次观看</span><span>2025年11月</span></span>
   </a>
   <div class="body">
     <label class="chk"><input type="checkbox"></label>
-    <h3>From PRD to Your First Lines of Code — A Complete Beginner's Guide</h3>
-    <div class="meta"><span class="tag">How I AI · Claire Vo</span><span class="tag v">most important watch</span></div>
-    <p class="why">She turns an idea into a one-page plan (a "PRD") with <b>ChatPRD</b>, then builds the real app in <b>Cursor</b> — and keeps telling the AI "make it prettier," "explain what you're doing." That habit — plan first, let the AI narrate — is the exact fix for "I don't know how to prompt." From a former Chief Product Officer; calm and beginner-paced. <em>Heads up: a half-step more technical (it touches a real code editor) — intentional, it's where you graduate from "toy" to "real."</em></p>
-    <div class="do"><b>What you'll see:</b> idea → one-page plan → a working app built and restyled by talking to the AI. <b>After:</b> turn your Step 1 sentence into a 5-bullet plan — what it does, who uses it, the 3 things it must do on day one.</div>
-    <a class="go" href="https://www.youtube.com/watch?v=k0gmTOm1eus" target="_blank" rel="noopener">Watch it →</a>
+    <h3>From PRD to Your First Lines of Code（英文）</h3>
+    <div class="meta"><span class="tag">How I AI · Claire Vo</span><span class="tag v">最重要的一看</span></div>
+    <p class="why">她先用 <b>ChatPRD</b> 把一个想法变成一页计划（PRD），再在 <b>Cursor</b> 里把真正的 App 做出来——而且她不停地跟 AI 说"做得好看点""解释一下你在干什么"。这个习惯——先规划、让 AI 边做边讲——正是治"我不会写提示词"的解药。讲者是前首席产品官，节奏沉稳、照顾新手。<em>提醒：这一支稍微技术一点（会碰到真正的代码编辑器）——这是故意的，是你从"玩具"升级到"真东西"的地方。</em></p>
+    <div class="do"><b>你会看到：</b>想法 → 一页计划 → 靠对话把 App 做出来并美化。<b>看完后：</b>把第 1 步那句话扩成 5 条要点——做什么、给谁用、上线第一天必须能做的 3 件事。</div>
+    <a class="go" href="https://www.youtube.com/watch?v=k0gmTOm1eus" target="_blank" rel="noopener">去看 →</a>
   </div>
 </article>
 
-<!-- RULES -->
+<!-- 规则 -->
 <div class="rules">
-  <h2>The 3 rules that fix "I don't know how to prompt"</h2>
-  <p>Print these. Use them in every session. They're the whole game.</p>
-  <div class="rule"><div class="num">1</div><div><b>Tell it you're a beginner — every time.</b><span class="ex">"I've never written code. Build this, and explain each step in plain English so I actually understand what's happening."</span></div></div>
-  <div class="rule"><div class="num">2</div><div><b>Start tiny. Add one thing at a time.</b><span class="ex">Not "build me the whole app." Instead: "First, just a sign-up screen. Once that works, we'll add the next piece."</span></div></div>
-  <div class="rule"><div class="num">3</div><div><b>Write 3 sentences before you open the tool.</b><span class="ex">What it does, who it's for, what "done" looks like. A good prompt is just a tiny product doc — a skill you already have.</span></div></div>
+  <h2>治好"我不会写提示词"的 3 条规则</h2>
+  <p>把它们记下来，每次都用。这就是全部诀窍。</p>
+  <div class="rule"><div class="num">1</div><div><b>每次都告诉它你是新手。</b><span class="ex">"我从没写过代码。请帮我做这个，并用大白话解释每一步，让我真的看懂在发生什么。"</span></div></div>
+  <div class="rule"><div class="num">2</div><div><b>从最小处开始，一次只加一样东西。</b><span class="ex">别说"帮我把整个 App 做出来"。而是说："先只做一个注册页面。它跑通了，我们再加下一块。"</span></div></div>
+  <div class="rule"><div class="num">3</div><div><b>打开工具之前，先写三句话。</b><span class="ex">它做什么、给谁用、"做完"长什么样。好的提示词，就是一份迷你产品文档——这个技能你本来就有。</span></div></div>
 </div>
 
-<!-- STEP 4 -->
+<!-- 第4步 -->
 <div class="phase">
-  <span class="lbl">Step 4 · Build for real</span>
-  <h2>Build &amp; ship something this weekend</h2>
-  <div class="sub">The full hands-on. Pick a tool, follow along, deploy a live thing.</div>
+  <span class="lbl">第 4 步 · 真正动手做</span>
+  <h2>这个周末，做出并上线一个东西</h2>
+  <div class="sub">完整实操。选一个工具，跟着做，部署一个能访问的东西。</div>
 </div>
 <article class="card" data-step>
   <a class="thumb" href="https://www.youtube.com/watch?v=BpOsHF5Oj_I" target="_blank" rel="noopener">
-    <img loading="lazy" src="https://i.ytimg.com/vi/BpOsHF5Oj_I/maxresdefault.jpg" alt="Vibe coding full course">
+    <img loading="lazy" src="https://i.ytimg.com/vi/BpOsHF5Oj_I/maxresdefault.jpg" alt="vibe coding 完整课程">
     <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-    <span class="vbadge"><span class="hot">most popular</span><span>76K views</span><span>May 2026</span></span>
+    <span class="vbadge"><span class="hot">最热门</span><span>7.6 万次观看</span><span>2026年5月</span></span>
   </a>
   <div class="body">
     <label class="chk"><input type="checkbox"></label>
-    <h3>Vibe Coding for Beginners — Full Course 2026</h3>
-    <div class="meta"><span class="tag">Riley Brown</span><span class="tag v">chaptered · do it in chunks</span></div>
-    <p class="why">The most-watched and most-recent, by the biggest non-technical-founder educator out there. Build a web app → add a login and database → add AI features → put it live on the internet → then turn the same app into a desktop and even an iPhone app. It also shows the real superpower: when something breaks, you paste the error to the AI and it fixes itself. <em>Note: it uses Codex (needs a paid ChatGPT subscription) — but the workflow is identical in any Step 5 tool.</em></p>
-    <div class="do"><b>What you'll see:</b> a complete build from blank screen → deployed, working app, including troubleshooting by feeding errors back to the AI. <b>After:</b> build YOUR thing from your Step 3 plan — not the demo. Use the 3 rules. It'll feel messy; that's normal. Keep going.</div>
-    <a class="go" href="https://www.youtube.com/watch?v=BpOsHF5Oj_I" target="_blank" rel="noopener">Watch it →</a>
+    <h3>Vibe Coding for Beginners — Full Course 2026（英文）</h3>
+    <div class="meta"><span class="tag">Riley Brown</span><span class="tag v">分章节 · 可以分段看</span></div>
+    <p class="why">全网观看最多、也最新，作者是这个领域最大的"非技术创始人"教育者。做一个网页 App → 加登录和数据库 → 加 AI 功能 → 发布到互联网上 → 再把同一个 App 变成桌面端、甚至 iPhone App。它还展示了真正的超能力：东西坏了，你把报错贴给 AI，它自己修。<em>注意：它用的是 Codex（需要付费 ChatGPT 订阅）——但换成第 5 步里的任何工具，流程完全一样。</em></p>
+    <div class="do"><b>你会看到：</b>从空白屏幕 → 部署上线的能用 App 的完整过程，包括怎么靠"把报错喂回给 AI"来排错。<b>看完后：</b>用你第 3 步的计划做<b>你自己的</b>东西——不是 demo。用上那 3 条规则。会觉得乱，这很正常。继续做。</div>
+    <a class="go" href="https://www.youtube.com/watch?v=BpOsHF5Oj_I" target="_blank" rel="noopener">去看 →</a>
   </div>
 </article>
 
-<!-- STEP 5 -->
+<!-- 第5步 -->
 <div class="phase">
-  <span class="lbl">Step 5 · Choose your tool</span>
-  <h2>Pick one and don't tool-hop</h2>
-  <div class="sub">Watch only when you're deciding where to build. Then commit.</div>
+  <span class="lbl">第 5 步 · 选你的工具</span>
+  <h2>选一个，别来回换</h2>
+  <div class="sub">只在你要决定"在哪做"时看。然后就定下来。</div>
 </div>
 <article class="card" data-step>
   <a class="thumb" href="https://www.youtube.com/watch?v=OZOokCf2R_4" target="_blank" rel="noopener">
-    <img loading="lazy" src="https://i.ytimg.com/vi/OZOokCf2R_4/maxresdefault.jpg" alt="Ranking AI app builders">
+    <img loading="lazy" src="https://i.ytimg.com/vi/OZOokCf2R_4/maxresdefault.jpg" alt="AI 应用搭建工具排名">
     <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-    <span class="vbadge"><span>53K views</span><span>Jan 2026</span></span>
+    <span class="vbadge"><span>5.3 万次观看</span><span>2026年1月</span></span>
   </a>
   <div class="body">
     <label class="chk"><input type="checkbox"></label>
-    <h3>I Ranked Every AI App Builder: Lovable vs Bolt vs Replit vs Cursor</h3>
+    <h3>I Ranked Every AI App Builder: Lovable vs Bolt vs Replit vs Cursor（英文）</h3>
     <div class="meta"><span class="tag">Build Great Products</span></div>
-    <p class="why">Stops the #1 beginner time-sink: tool-hopping instead of building. A product designer ranks the tools S-to-D by what you're making, so you pick once and commit. (His big 2026 point: models like Claude Opus 4.5 and Gemini 3 now make these tools genuinely good.)</p>
-    <div class="do"><b>The short version, if you want to skip the video:</b></div>
+    <p class="why">它终结了新手第一大坑：不停换工具、却不动手。一位产品设计师按"你要做什么"把工具从 S 到 D 排名，让你一次选定、立刻开干。（他 2026 年的核心观点：像 Claude Opus 4.5、Gemini 3 这样的模型，已经让这些工具真正好用了。）</p>
+    <div class="do"><b>想跳过视频的话，精简版在这（国内对应见下方对照表）：</b></div>
     <div class="tools">
-      <div class="tool"><b>Bolt or Lovable</b> — <span>the easy entry points. Type what you want, get a working web app in minutes. Lovable's output looks nicest. Start here.</span></div>
-      <div class="tool"><b>Replit</b> — <span>the best <em>teacher</em>; shows what's happening under the hood while staying beginner-friendly. Pick this if you want to learn, not just generate.</span></div>
-      <div class="tool"><b>Cursor + Claude Code</b> — <span>the most powerful combo for bigger, complex apps. Steeper — save it for once you're past the first hump.</span></div>
+      <div class="tool"><b>Bolt 或 Lovable</b> — <span>最容易上手。说出你要什么，几分钟出一个能用的网页 App。Lovable 出来的最好看。从这里开始。</span></div>
+      <div class="tool"><b>Replit</b> — <span>最好的"老师"；在保持新手友好的同时，让你看清底层在干什么。想边学边做就选它。</span></div>
+      <div class="tool"><b>Cursor + Claude Code</b> — <span>做更大更复杂 App 的最强组合。更陡——过了第一道坎再用。</span></div>
     </div>
-    <p class="why" style="margin-top:14px">Don't worry that the videos each used a different tool — the <em>skill</em> (describe → build → fix) is identical everywhere. Pick one and stick with it for your first build.</p>
-    <a class="go" href="https://www.youtube.com/watch?v=OZOokCf2R_4" target="_blank" rel="noopener">Watch it →</a>
+    <p class="why" style="margin-top:14px">别担心前面的视频各用各的工具——那个<em>技能</em>（描述 → 生成 → 修复）到哪都一样。选一个，第一个项目就用它做完。</p>
+    <a class="go" href="https://www.youtube.com/watch?v=OZOokCf2R_4" target="_blank" rel="noopener">去看 →</a>
   </div>
 </article>
 
-<!-- CHINESE -->
+<!-- 中国 -->
 <div class="phase" id="china">
-  <span class="lbl">🇨🇳 Building for China · 中文 + 国内技术栈</span>
+  <span class="lbl">🇨🇳 给中国用户做产品 · 国内技术栈</span>
   <h2>给中国用户做产品 — 用对的技术栈</h2>
-  <div class="sub">This is your real path, Kai. Same skill as the videos above — but plumbing that actually works in China.</div>
+  <div class="sub">这才是你真正该走的路，Kai。技能和上面的视频一样——但管道在国内真的好使。</div>
 </div>
 <article class="card" data-step>
-  <div class="banner" style="background:linear-gradient(120deg,rgba(109,155,255,.16),rgba(95,240,192,.08))"><span class="ico">🧰</span><div><div class="bt">推荐技术栈 · The right stack</div><div style="color:var(--mut);font-size:14px">微信小程序 + 腾讯云 CloudBase + 国产 AI 工具</div></div></div>
+  <div class="banner" style="background:linear-gradient(120deg,rgba(109,155,255,.16),rgba(95,240,192,.08))"><span class="ico">🧰</span><div><div class="bt">推荐技术栈</div><div style="color:var(--mut);font-size:14px">微信小程序 + 腾讯云 CloudBase + 国产 AI 工具</div></div></div>
   <div class="body">
     <label class="chk"><input type="checkbox"></label>
     <h3>Kai 的"国内版"配方</h3>
     <div class="tools">
       <div class="tool"><b>AI 编程工具</b> — <span><b>Trae</b>（字节，新手最友好，SOLO 全自动）或 <b>CodeBuddy</b>（腾讯，深度集成微信生态）；<b>Cursor</b> 在国内也能用。搭配国产模型 <b>DeepSeek / 腾讯混元 / 通义千问</b>。</span></div>
       <div class="tool"><b>后端 + 数据库</b> — <span><b>腾讯云 CloudBase（云开发）</b>：相当于"国内版 Firebase/Supabase"，国内访问稳定，内置 AI 能力，和 Cursor / Trae / Claude Code 无缝协作。</span></div>
-      <div class="tool"><b>产品形态</b> — <span><b>微信小程序</b>：触达中国用户最快，无应用商店摩擦。个人主体注册最简单。</span></div>
+      <div class="tool"><b>产品形态</b> — <span><b>微信小程序</b>：触达中国用户最快、无应用商店摩擦。个人主体注册最简单。</span></div>
       <div class="tool"><b>💰 红利</b> — <span>微信"AI 小程序成长计划"在送免费云资源 + 混元算力（6 个月免费 CloudBase、上亿 Token）。开始前先薅。</span></div>
       <div class="tool" style="border-color:#5a4a22"><b>⚠️ 注意</b> — <span>视频里的 Supabase / Firebase / Vercel 在国内被墙或很慢，别照搬。独立网站/域名需 <b>ICP 备案</b>；走小程序则简单很多。</span></div>
     </div>
   </div>
 </article>
 <article class="card" data-step>
-  <div class="banner" style="background:linear-gradient(120deg,rgba(109,155,255,.14),rgba(95,240,192,.06))"><span class="ico">🔄</span><div><div class="bt">Western → China · 服务对照表</div><div style="color:var(--mut);font-size:14px">跟着英文教程做，看到左边的服务就换成右边的国内对应</div></div></div>
+  <div class="banner" style="background:linear-gradient(120deg,rgba(109,155,255,.14),rgba(95,240,192,.06))"><span class="ico">🔄</span><div><div class="bt">「西方 → 中国」服务对照表</div><div style="color:var(--mut);font-size:14px">跟着英文教程做，看到左边的服务就换成右边的国内对应</div></div></div>
   <div class="body">
     <label class="chk"><input type="checkbox"></label>
-    <h3>The translation cheat-sheet</h3>
-    <p class="why">Every English tutorial assumes Western services. Keep this open while you follow along — whenever the video reaches for a tool on the left, swap in the right-hand option. The <em>steps</em> are the same; only the service name changes.</p>
+    <h3>服务对照速查表</h3>
+    <p class="why">每个英文教程都默认用西方服务。跟着做的时候把这张表开着——视频里一用到左边的工具，就换成右边的。<em>步骤一样，只是换个服务名而已。</em></p>
     <table class="map">
-      <thead><tr><th>英文教程里的 (West)</th><th>中国换成 (China)</th></tr></thead>
+      <thead><tr><th>英文教程里的（西方）</th><th>中国换成</th></tr></thead>
       <tbody>
-        <tr><td class="w">AI coding tool<br><small>Cursor / Codex</small></td><td class="c">Cursor（国内可直接用）/ Trae / CodeBuddy / 通义灵码<small>新手出原型选 Trae；微信生态选 CodeBuddy</small></td></tr>
-        <tr><td class="w">AI model<br><small>Claude / GPT / Gemini</small></td><td class="c">DeepSeek / 通义千问 Qwen / 腾讯混元 / 豆包 / Kimi<small>写代码首选 DeepSeek——能力强、API 极便宜</small></td></tr>
-        <tr><td class="w">Backend + DB + 登录<br><small>Supabase / Firebase</small></td><td class="c">腾讯云 CloudBase 云开发<small>最接近的对标；小程序用「微信云开发」（同一套）</small></td></tr>
-        <tr><td class="w">部署 / 托管<br><small>Vercel / Netlify</small></td><td class="c">腾讯云 CloudBase 静态托管 / 阿里云 OSS + CDN<small>⚠️ 国内无完美对标；小程序则直接通过微信发布，不需要这层</small></td></tr>
+        <tr><td class="w">AI 编程工具<br><small>Cursor / Codex</small></td><td class="c">Cursor（国内可直接用）/ Trae / CodeBuddy / 通义灵码<small>新手出原型选 Trae；微信生态选 CodeBuddy</small></td></tr>
+        <tr><td class="w">AI 模型<br><small>Claude / GPT / Gemini</small></td><td class="c">DeepSeek / 通义千问 / 腾讯混元 / 豆包 / Kimi<small>写代码首选 DeepSeek——能力强、API 极便宜</small></td></tr>
+        <tr><td class="w">后端 + 数据库 + 登录<br><small>Supabase / Firebase</small></td><td class="c">腾讯云 CloudBase 云开发<small>最接近的对标；小程序用「微信云开发」（同一套）</small></td></tr>
+        <tr><td class="w">部署 / 托管<br><small>Vercel / Netlify</small></td><td class="c">腾讯云 CloudBase 静态托管 / 阿里云 OSS + CDN<small>⚠️ 国内无完美对标；走小程序则直接通过微信发布，不需要这层</small></td></tr>
         <tr><td class="w">代码托管<br><small>GitHub</small></td><td class="c">Gitee 码云 / 腾讯 CODING / 阿里云效<small>GitHub 国内能用但慢，备份到 Gitee 更稳</small></td></tr>
         <tr><td class="w">支付<br><small>Stripe</small></td><td class="c">微信支付 / 支付宝<small>小程序里微信支付是原生集成</small></td></tr>
-        <tr><td class="w">登录<br><small>Google / Apple sign-in</small></td><td class="c">微信登录 / 手机号一键登录</td></tr>
+        <tr><td class="w">登录<br><small>Google / Apple 登录</small></td><td class="c">微信登录 / 手机号一键登录</td></tr>
         <tr><td class="w">短信验证码<br><small>Twilio</small></td><td class="c">腾讯云短信 / 阿里云短信</td></tr>
         <tr><td class="w">分发<br><small>App Store / Google Play</small></td><td class="c">微信小程序（免商店，最快）/ 安卓应用宝·华为·小米商店<small>iOS 原生 App 仍走 App Store 中国区</small></td></tr>
         <tr><td class="w">域名 / 网站<br><small>买域名直接上线</small></td><td class="c">国内服务器托管的网站/域名需 <b>ICP 备案</b><small>走小程序可绕开大部分备案麻烦，只需主体注册</small></td></tr>
@@ -361,29 +337,29 @@
   </div>
 </article>
 <article class="card" data-step>
-  <div class="banner" style="background:linear-gradient(120deg,rgba(95,240,192,.16),rgba(109,155,255,.08))"><span class="ico">⚡</span><div><div class="bt" style="color:var(--acc2)">⭐ 实战案例 · Real build</div><div style="color:var(--mut);font-size:14px">零基础 · 微信小程序 · 1 小时上线</div></div></div>
+  <div class="banner" style="background:linear-gradient(120deg,rgba(95,240,192,.16),rgba(109,155,255,.08))"><span class="ico">⚡</span><div><div class="bt" style="color:var(--acc2)">⭐ 实战案例</div><div style="color:var(--mut);font-size:14px">零基础 · 微信小程序 · 1 小时上线</div></div></div>
   <div class="body">
     <label class="chk"><input type="checkbox"></label>
     <h3>纯小白 1 小时上线微信小程序 — CloudBase AI ToolKit + Cursor</h3>
     <div class="meta"><span class="tag ch">腾讯云开发者社区</span><span class="tag ch">零基础</span></div>
     <p class="why">一位<b>零编程基础</b>的作者，用 <b>腾讯云 CloudBase AI ToolKit + Cursor</b>，全程靠对话开发，<b>1 小时</b>做出并上线了"AI 情绪创可贴"微信小程序——含云数据库、云函数、AI 智能对话、图文生成。ToolKit 自动建数据库集合、云函数、前端页面。这就是 Kai 该照着走的"国内版"第一步。</p>
-    <div class="do"><b>看完后:</b> 开通腾讯云 CloudBase 控制台 → 装微信开发者工具 + Cursor（或 Trae）→ 照文章把"对话式开发"完整跑一遍，做一个最小的自己的小程序。</div>
+    <div class="do"><b>看完后：</b>开通腾讯云 CloudBase 控制台 → 装微信开发者工具 + Cursor（或 Trae）→ 照文章把"对话式开发"完整跑一遍，做一个最小的、属于你自己的小程序。</div>
     <a class="go" href="https://cloud.tencent.com/developer/article/2537155" target="_blank" rel="noopener">读实战教程 →</a>
   </div>
 </article>
 <div class="phase" style="margin-top:34px">
   <span class="lbl">中文 · 激励 + 参考</span>
   <h2>真实案例：不会写代码，做出了爆款 App</h2>
-  <div class="sub">This story alone is worth the whole page.</div>
+  <div class="sub">光这一个故事，就值回整页。</div>
 </div>
 <article class="card" data-step>
-  <div class="banner" style="background:linear-gradient(120deg,rgba(255,206,106,.16),rgba(255,143,177,.08))"><span class="ico">🐱</span><div><div class="bt" style="color:var(--gold)">⭐ 真实案例 · Real story</div><div style="color:var(--mut);font-size:14px">App Store 摄影榜 Top 20 · 11万+ 下载 · 零编程</div></div></div>
+  <div class="banner" style="background:linear-gradient(120deg,rgba(255,206,106,.16),rgba(255,143,177,.08))"><span class="ico">🐱</span><div><div class="bt" style="color:var(--gold)">⭐ 真实案例</div><div style="color:var(--mut);font-size:14px">App Store 摄影榜 Top 20 · 11 万+ 下载 · 零编程</div></div></div>
   <div class="body">
     <label class="chk"><input type="checkbox"></label>
     <h3>「小猫补光灯」— 陈云飞的故事</h3>
     <div class="meta"><span class="tag ch">独立开发</span><span class="tag ch">Cursor</span></div>
     <p class="why">陈云飞是大厂管理层裸辞后转型的自媒体博主，<b>完全不会编程</b>。他用 <b>Cursor</b>，靠"用大白话把需求讲清楚"——比如"色卡要用圆角矩形，不要圆形"——让 AI 写完全部代码，约 <b>1.5 小时</b>做出并上架了一款补光 App，迅速冲进苹果商店摄影分类前 20，下载量破 11 万。核心打法：<b>从用户角度想问题 + 在社交平台收集反馈 + 不断让 AI 迭代</b>。不会写代码，从来不是做产品的门槛。</p>
-    <div class="do"><b>给 Kai 的一句话：</b> 他做到的，你也能做到——你缺的不是技术合伙人，是开始的那一下。<b>看完后:</b> 别纠结技术，先想清楚"谁会用、解决什么具体痛点"。</div>
+    <div class="do"><b>给 Kai 的一句话：</b>他做到的，你也能做到——你缺的不是技术合伙人，是开始的那一下。<b>看完后：</b>别纠结技术，先想清楚"谁会用、解决什么具体痛点"。</div>
     <a class="go" href="https://www.sohu.com/a/830224819_121924584" target="_blank" rel="noopener">读这个故事 →</a>
   </div>
 </article>
@@ -393,40 +369,40 @@
   <li><b>少数派 · 设计师借助 AI 独立完成浏览器插件</b> — 另一个"非工程师从写代码到上架"的完整记录。 <a href="https://sspai.com/post/94949" target="_blank" rel="noopener">少数派 →</a></li>
   <li><b>国产 5 大 AI 编程工具横评</b>（通义灵码 / Trae / CodeBuddy / 文心快码 / CodeGeeX）— 选工具看这个。新手出原型选 Trae，微信生态选 CodeBuddy。 <a href="https://blog.csdn.net/csdngouwei/article/details/160726130" target="_blank" rel="noopener">CSDN 横评 →</a></li>
   <li><b>微信官方 · 小程序 AI 开发指南</b> — 微信自家的 AI 开发模式接入文档，最权威。 <a href="https://developers.weixin.qq.com/miniprogram/dev/ai/guide" target="_blank" rel="noopener">微信开放文档 →</a></li>
-  <li>💡 在<b>小红书</b>搜「AI 编程」「独立开发」「Cursor 教程」「CloudBase 小程序」「vibe coding」能找到大量中文实操笔记——很多独立开发者都在那里冷启动。</li>
+  <li>💡 在<b>小红书</b>搜「AI 编程」「独立开发」「Cursor 教程」「CloudBase 小程序」「vibe coding」，能找到大量中文实操笔记——很多独立开发者都在那里冷启动。</li>
 </ul>
 
-<!-- REFERENCE -->
+<!-- 参考 -->
 <div class="phase">
-  <span class="lbl">Keep nearby</span>
-  <h2>📚 Reference shelf</h2>
-  <div class="sub">Dip in when stuck or curious — don't read end-to-end.</div>
+  <span class="lbl">随手备查</span>
+  <h2>📚 参考书架</h2>
+  <div class="sub">卡住或好奇时翻一翻——不用从头读到尾。</div>
 </div>
 <ul class="ref">
-  <li><b>r/vibecoding</b> — 89,000-member community of people exactly where you are. Search before you panic; someone's hit your error already. <a href="https://www.reddit.com/r/vibecoding/" target="_blank" rel="noopener">reddit.com/r/vibecoding →</a></li>
-  <li><b>The community's hard-won lessons</b> — write a spec first, save your work often, pick your tool by how complex the project will eventually get. <a href="https://www.aitooldiscovery.com/guides/vibe-coding-reddit" target="_blank" rel="noopener">Read the distilled version →</a></li>
-  <li><b>Riley Brown's free "Vibecoding 101" PDF</b> — a printable cheat-sheet companion to the course. <a href="https://maven.com/p/ecbf0c" target="_blank" rel="noopener">Grab it →</a></li>
-  <li><b>"Shipping an MVP in 48 hours" (Medium, 2026)</b> — a no-fluff written blueprint if you'd rather read than watch. <a href="https://medium.com/@Travel4Fun4U/stop-coding-from-scratch-in-2026-how-non-tech-founders-are-shipping-mvps-in-48-hours-with-ai-33b489d7b671" target="_blank" rel="noopener">Read it →</a></li>
+  <li><b>r/vibecoding</b>（Reddit）— 8.9 万成员的社区，里面的人和你处境一样。慌之前先搜一下；你的报错多半有人遇到过。 <a href="https://www.reddit.com/r/vibecoding/" target="_blank" rel="noopener">reddit.com/r/vibecoding →</a></li>
+  <li><b>社区用血泪换来的经验</b> — 先写需求说明、经常保存进度、按项目最终的复杂度来选工具。 <a href="https://www.aitooldiscovery.com/guides/vibe-coding-reddit" target="_blank" rel="noopener">读精简版 →</a></li>
+  <li><b>Riley Brown 的免费《Vibecoding 101》PDF</b> — 配套课程的可打印小抄。 <a href="https://maven.com/p/ecbf0c" target="_blank" rel="noopener">领取 →</a></li>
+  <li><b>《48 小时做出 MVP》（Medium, 2026）</b> — 喜欢读胜过看视频的话，一份没废话的书面蓝图。 <a href="https://medium.com/@Travel4Fun4U/stop-coding-from-scratch-in-2026-how-non-tech-founders-are-shipping-mvps-in-48-hours-with-ai-33b489d7b671" target="_blank" rel="noopener">去读 →</a></li>
 </ul>
 
 <footer>
-  <p><strong>When you get stuck — and you will — that's not a sign you can't do this.</strong> It's the exact moment every builder hits. Paste the error back to the AI, tell it you're a beginner, ask it to explain and fix. That loop <em>is</em> the skill.</p>
-  <p>Kai — you've been waiting on someone else to build your idea. You don't have to anymore. Start at the top. 🚀</p>
-  <div class="sig">Put together for Kai — who's closer than he thinks.</div>
+  <p><strong>卡住的时候——你一定会卡住——那不代表你做不了。</strong>那正是每一个做东西的人都会遇到的时刻。把报错贴回给 AI，告诉它你是新手，让它解释并修好。这个循环<em>本身</em>，就是技能。</p>
+  <p>Kai——你一直在等别人来实现你的想法。现在不用等了。从最上面开始。🚀</p>
+  <div class="sig">为 Kai 而做——他比自己以为的，更接近成功。</div>
 </footer>
 </div>
 
 <script>
   var boxes=[].slice.call(document.querySelectorAll('.card[data-step] input'));
-  var KEY='kai-build-progress-v2';
+  var KEY='kai-build-progress-zh';
   function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
   function save(){localStorage.setItem(KEY,JSON.stringify(boxes.map(function(b){return b.checked})))}
   function paint(){
     var n=boxes.filter(function(b){return b.checked}).length,t=document.getElementById('ptext');
     document.getElementById('barfill').style.width=(n/boxes.length*100)+'%';
-    if(n===0)t.textContent='0 of '+boxes.length+' done — your move, Kai.';
-    else if(n===boxes.length)t.textContent='All '+boxes.length+' done. Now go build YOUR thing. 🚀';
-    else t.textContent=n+' of '+boxes.length+' done — keep going, Kai.';
+    if(n===0)t.textContent='还没开始 — 该你了，Kai。';
+    else if(n===boxes.length)t.textContent='全部 '+boxes.length+' 项完成。现在去做你自己的产品吧。🚀';
+    else t.textContent='已完成 '+n+' / '+boxes.length+' — 继续，Kai。';
     boxes.forEach(function(b){b.closest('.card').classList.toggle('done',b.checked)});
   }
   var s=load();boxes.forEach(function(b,i){b.checked=!!s[i];b.addEventListener('change',function(){save();paint()})});paint();
