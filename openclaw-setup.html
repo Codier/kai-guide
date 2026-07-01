@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw — Two-Agent VM Setup Guide</title>
+<style>
+  :root{--fg:#1b1f24;--muted:#5b6570;--bg:#ffffff;--code:#f5f7fa;--border:#e3e8ee;--accent:#2563eb;}
+  @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#9aa7b3;--bg:#0d1117;--code:#161b22;--border:#30363d;--accent:#58a6ff;}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans SC",sans-serif}
+  main{max-width:860px;margin:0 auto;padding:40px 22px 96px}
+  h1,h2,h3{line-height:1.25;margin:1.6em 0 .5em;font-weight:700}
+  h1{font-size:1.9rem;margin-top:.2em}
+  h2{font-size:1.35rem;border-bottom:1px solid var(--border);padding-bottom:.3em}
+  h3{font-size:1.1rem}
+  a{color:var(--accent)}
+  code{background:var(--code);padding:.15em .4em;border-radius:5px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+  pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow:auto}
+  pre code{background:none;padding:0}
+  table{border-collapse:collapse;width:100%;margin:1em 0;display:block;overflow:auto}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left}
+  blockquote{margin:1em 0;padding:.4em 1em;border-left:4px solid var(--accent);color:var(--muted);background:var(--code);border-radius:0 8px 8px 0}
+  hr{border:none;border-top:1px solid var(--border);margin:2em 0}
+  .foot{margin-top:48px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);padding-top:14px}
+  ul,ol{padding-left:1.4em}
+</style>
+</head><body><main>
+<div id="content">Rendering…</div>
+<div class="foot">Public copy for setup reference. Contains placeholders only — no secrets. Fill in bot tokens &amp; Telegram IDs on the target machine.</div>
+</main>
+<script id="md" type="text/plain">
+# OpenClaw — Fresh VM, Two Isolated Agents (Ivy + Tony) — One‑Shot Setup Guide
+
+Goal: on a **new, separate VM**, install OpenClaw and run **two fully isolated agents**
+(one for **Ivy**, one for **Tony**), each with its own workspace, memory, sessions, and
+auth — routed from Telegram. Designed to be pasted into **Claude Code** on the VM and
+executed step by step.
+
+> This mirrors the author's working instance (which runs `main` = Di + `summer` on one
+> gateway, routing Telegram DMs by sender ID to different agents).
+
+---
+
+## 0. Decisions (read first — 30 seconds)
+
+**Routing question: can Ivy and Tony both use Telegram and still land on the right agent?**
+**Yes.** Two supported designs:
+
+- **Design A — ONE Telegram bot, split by sender ID (recommended, simplest).**
+  Both add the *same* bot. Each person's numeric Telegram ID is bound to their own agent.
+  Isolation is at the **agent** level (separate workspace/sessions), enabled by
+  `session.dmScope: "per-channel-peer"`. This is exactly how the author's Di/Summer split works.
+  - Pro: one bot, one token, least setup.
+  - Con: both talk to the same bot handle (fine for two friends).
+
+- **Design B — TWO Telegram bots (one per person), split by `accountId` (cleaner identity).**
+  Each person adds *their own* bot. Best if you want distinct bot names/handles.
+  - Pro: separate bot identity + separate allowlist per person.
+  - Con: two BotFather bots/tokens.
+
+- **Design C — different channels** (e.g. Ivy on Telegram, Tony on WhatsApp/LINE).
+  Trivial: bind by `channel`. Use only if they insist on different apps.
+
+**Chosen for this setup (per Di): Design B — two Telegram bots (one per person) + Claude Code CLI backend** (both friends have Claude subscriptions). Design A (one shared bot) and Design C (different channels) are kept at the end for reference.
+
+**What you must collect before starting:**
+- [ ] A Telegram bot token (from **@BotFather**) — 1 for Design A, or 2 for Design B.
+- [ ] Ivy's and Tony's **numeric Telegram user IDs** (each person sends `/start` to
+      **@userinfobot** and reads back their ID, e.g. `123456789`).
+- [ ] A model backend (pick one):
+  - **Claude Code CLI** (recommended if you'll use Claude subscriptions): the `claude` CLI
+    installed + logged in on the VM → gives the `claude-cli/*` models.
+  - **or** an **Anthropic API key** → `anthropic/claude-*` models.
+  - **or** a cheap default like **DeepSeek** API key.
+
+---
+
+## 1. Provision the VM
+
+- Ubuntu 22.04/24.04 LTS (x86_64), 2+ vCPU, 4 GB+ RAM, 20 GB+ disk.
+- A non-root sudo user (examples assume user `ubuntu`, home `/home/ubuntu`).
+- Outbound internet (Telegram API, model providers).
+
+```bash
+sudo apt update && sudo apt -y upgrade
+sudo apt -y install git curl ca-certificates
+```
+
+---
+
+## 2. Install OpenClaw
+
+Fastest (installer script handles Node 24 + install + daemon):
+
+```bash
+curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-onboard
+```
+
+Or via npm if you manage Node yourself (Node 24 recommended):
+
+```bash
+npm install -g openclaw@latest
+```
+
+One-time local config/workspace bootstrap:
+
+```bash
+openclaw setup
+```
+
+Sanity check the binary + paths:
+
+```bash
+openclaw --version
+openclaw health || true
+```
+
+Key paths (memorize):
+- Config: `~/.openclaw/openclaw.json`  (JSON5 — comments + trailing commas OK)
+- State dir: `~/.openclaw/`
+- Per-agent workspace: `~/.openclaw/workspace-<agentId>`
+- Per-agent auth/sessions: `~/.openclaw/agents/<agentId>/…`
+- Logs: `/tmp/openclaw/`
+
+---
+
+## 3. Create the two agent workspaces
+
+```bash
+openclaw agents add ivy
+openclaw agents add tony
+openclaw agents list --bindings
+```
+
+This creates `~/.openclaw/workspace-ivy` and `~/.openclaw/workspace-tony`, each with a
+`SOUL.md`, `AGENTS.md`, and optional `USER.md`, plus isolated `agentDir` + sessions.
+
+Personalize each (persona, owner profile). Minimal example:
+
+```bash
+cat > ~/.openclaw/workspace-ivy/USER.md <<'EOF'
+# USER.md — About Ivy
+- Primary user: Ivy
+- Channel: Telegram | Sender ID: <IVY_TG_ID>
+- Timezone: Asia/Hong_Kong
+EOF
+
+cat > ~/.openclaw/workspace-tony/USER.md <<'EOF'
+# USER.md — About Tony
+- Primary user: Tony
+- Channel: Telegram | Sender ID: <TONY_TG_ID>
+- Timezone: Asia/Shanghai
+EOF
+```
+
+(Optionally make each workspace its own private git repo, like the author does with
+`personal-wiki`, so memory/notes are backed up.)
+
+---
+
+## 4. Model backend
+
+**→ Chosen: Option 1 (Claude Code CLI)** — Ivy & Tony have Claude subscriptions, so use the
+`claude-cli/*` models. (Options 2/3 kept as alternatives.)
+
+**Option 1 — Claude Code CLI backend (CHOSEN).** Install + log in the `claude` CLI on
+the VM (so OpenClaw's `claude-cli/*` models work):
+
+```bash
+npm install -g @anthropic-ai/claude-code    # or the current Claude Code install method
+claude   # run once, complete login/auth
+```
+
+Then reference models like `claude-cli/claude-opus-4-8`, `claude-cli/claude-sonnet-4-6`.
+
+**Option 2 — Anthropic API key.** Export it (or put in config `models.providers`):
+
+```bash
+echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.bashrc && source ~/.bashrc
+```
+
+Use models `anthropic/claude-opus-4-8`, `anthropic/claude-sonnet-4-6`.
+
+**Option 3 — DeepSeek (cheap default).** Add under `models.providers` (see config below) and
+export `DEEPSEEK_API_KEY`.
+
+---
+
+## 5. Telegram bots (two — one per person)
+
+1. In Telegram, message **@BotFather** → `/newbot` **twice** → create Ivy's bot and Tony's
+   bot → copy **both tokens** (call them `<IVY_BOT_TOKEN>` and `<TONY_BOT_TOKEN>`).
+2. Have **Ivy** `/start` her bot, and **Tony** `/start` his bot (each once, so the bot can DM them).
+3. Get each numeric ID via **@userinfobot** (each person `/start`s it → reads back their ID),
+   giving `<IVY_TG_ID>` and `<TONY_TG_ID>`.
+
+The tokens go inline under `channels.telegram.accounts.<id>.botToken` in Section 6 (that's how
+OpenClaw's multi-account Telegram is documented). Keep the config file `chmod 600`.
+
+---
+
+## 6. The config — `~/.openclaw/openclaw.json` (Design B — two bots, claude-cli)
+
+Edit `~/.openclaw/openclaw.json`. This is the heart of it. Replace the `<…>` placeholders.
+
+```json5
+{
+  // ---- shared agent defaults ----
+  agents: {
+    defaults: {
+      // pick your primary/fallbacks to match the backend you set up in step 4
+      model: {
+        primary: "claude-cli/claude-opus-4-8",
+        fallbacks: ["claude-cli/claude-sonnet-4-6", "anthropic/claude-sonnet-4-6"],
+      },
+      models: {
+        "claude-cli/claude-opus-4-8": {},
+        "claude-cli/claude-sonnet-4-6": { alias: "sonnet" },
+        "anthropic/claude-opus-4-8": { alias: "opus" },
+        "anthropic/claude-sonnet-4-6": {},
+      },
+      maxConcurrent: 4,
+    },
+
+    // ---- the two isolated brains ----
+    list: [
+      {
+        id: "ivy",
+        default: true,                 // fallback agent if nothing matches
+        name: "Ivy",
+        workspace: "~/.openclaw/workspace-ivy",
+      },
+      {
+        id: "tony",
+        name: "Tony",
+        workspace: "~/.openclaw/workspace-tony",
+      },
+    ],
+  },
+
+  // ---- routing: each bot's account -> its agent ----
+  bindings: [
+    { agentId: "ivy",  match: { channel: "telegram", accountId: "ivy"  } },
+    { agentId: "tony", match: { channel: "telegram", accountId: "tony" } },
+  ],
+
+  // ---- keep DM sessions clean per sender ----
+  session: { dmScope: "per-channel-peer" },
+
+  // ---- two Telegram bots, one per person, each allowlisted to that person ----
+  channels: {
+    telegram: {
+      enabled: true,
+      streaming: { mode: "partial" },
+      accounts: {
+        ivy:  { botToken: "<IVY_BOT_TOKEN>",  dmPolicy: "allowlist", allowFrom: ["<IVY_TG_ID>"]  },
+        tony: { botToken: "<TONY_BOT_TOKEN>", dmPolicy: "allowlist", allowFrom: ["<TONY_TG_ID>"] },
+      },
+    },
+  },
+
+  // ---- keep agents from messaging each other unless you want it ----
+  tools: {
+    agentToAgent: { enabled: false },
+  },
+}
+```
+
+Notes:
+- **Why `session.dmScope: "per-channel-peer"`**: by default Telegram DMs collapse to a
+  single "main" session per agent. Since each person already routes to a *different agent*,
+  they're isolated regardless — but this setting keeps sessions cleanly per-sender and
+  matches the author's working setup. Keep it.
+- `default: true` on Ivy just means "if a message matches no binding, it goes to Ivy."
+  With the allowlist limited to the two IDs, only Ivy/Tony can talk to the bot anyway.
+- Model auth is **per-agent**: if using the `anthropic` API key via env, both agents inherit
+  it. If using `claude-cli`, make sure `claude` is logged in for the user running the gateway.
+
+---
+
+## 7. Start / restart + verify
+
+```bash
+openclaw gateway restart        # or: openclaw onboard --install-daemon  (first-time systemd)
+openclaw agents list --bindings
+openclaw channels status --probe
+openclaw health
+```
+
+Expected: two agents (`ivy`, `tony`), two Telegram bindings, telegram channel connected.
+
+**Live test:**
+- Ivy DMs the bot → reply should come from the **ivy** agent (check `~/.openclaw/agents/ivy/sessions`).
+- Tony DMs the bot → routed to **tony**.
+- Confirm they never see each other's context.
+
+---
+
+## 8. Run it as a service (survives reboot)
+
+The installer/onboarding can set up a **systemd user service**:
+
+```bash
+openclaw onboard --install-daemon
+# then:
+systemctl --user status openclaw          # check
+loginctl enable-linger $USER              # keep running after logout/reboot
+```
+
+Logs: `journalctl --user -u openclaw -f` and `/tmp/openclaw/`.
+
+---
+
+## 9. Alternative — Design A (one shared bot, split by sender ID)
+
+If you'd rather use a **single** bot (both add the same bot), swap Section 6's `bindings` +
+`channels.telegram` for this (everything else — agents.list, session.dmScope — stays the same):
+
+```json5
+{
+  bindings: [
+    { agentId: "ivy",  match: { channel: "telegram", peer: { kind: "direct", id: "<IVY_TG_ID>" } } },
+    { agentId: "tony", match: { channel: "telegram", peer: { kind: "direct", id: "<TONY_TG_ID>" } } },
+  ],
+  channels: {
+    telegram: {
+      enabled: true,
+      botToken: "<BOT_TOKEN>",
+      dmPolicy: "allowlist",
+      allowFrom: ["<IVY_TG_ID>", "<TONY_TG_ID>"],
+    },
+  },
+}
+```
+
+`session.dmScope: "per-channel-peer"` is what keeps the two senders' DMs cleanly separated on the one bot.
+
+## 9b. Design C delta — different channels
+
+E.g. Tony on WhatsApp instead:
+
+```bash
+openclaw channels login --channel whatsapp --account tony   # scan QR with Tony's phone
+```
+```json5
+{
+  bindings: [
+    { agentId: "ivy",  match: { channel: "telegram" } },
+    { agentId: "tony", match: { channel: "whatsapp" } },
+  ],
+}
+```
+
+---
+
+## 10. Optional niceties (copy from the author's setup)
+
+- **Voice replies (TTS):** `messages.tts` with OpenAI `gpt-4o-mini-tts` (voice `alloy`,
+  format `opus`). Needs an OpenAI key.
+- **Web search tool:** `tools.web.search.provider: "brave"` (needs a Brave Search API key)
+  — enables the agent to look things up.
+- **Audio transcription:** `tools.media.audio` with a Groq `whisper-large-v3-turbo` model
+  (needs a Groq key) so voice notes get transcribed.
+- **Per-agent model:** put `model: { primary: "..." }` on an entry in `agents.list` to give
+  Ivy and Tony different models.
+- **Daily newsletter / reminders:** replicate via `openclaw cron` jobs (isolated agentTurn,
+  `--announce --channel telegram --to <id>`), one per person.
+
+---
+
+## 11. Gotchas / checklist
+
+- [ ] Each person must `/start` the bot once before it can DM them.
+- [ ] Numeric IDs go in `allowFrom` **and** the binding `peer.id` (Design A).
+- [ ] `session.dmScope: "per-channel-peer"` is set.
+- [ ] Never share one `agentDir` between agents (causes auth/session collisions) — the
+      `openclaw agents add` command handles this correctly.
+- [ ] Token stored `chmod 600` (file) or via env; not world-readable.
+- [ ] If using `claude-cli` models, the `claude` CLI is logged in for the gateway's user.
+- [ ] `openclaw doctor --fix` if the gateway won't start; check `journalctl --user -u openclaw`.
+- [ ] JSON5 config: comments and trailing commas are allowed, but keep it valid.
+
+---
+
+### One-shot summary for Claude Code on the VM
+> "Install OpenClaw (`curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-onboard`
+> then `openclaw setup`). Install + log in the **Claude Code CLI** (`claude`) so the
+> `claude-cli/*` models work. Create two agents `ivy` and `tony` (`openclaw agents add`).
+> Create **two** Telegram bots via BotFather (one for Ivy, one for Tony); get each person's
+> numeric ID from @userinfobot. Write `~/.openclaw/openclaw.json` exactly as in Section 6
+> (two `channels.telegram.accounts` with each botToken, `bindings` by `accountId`,
+> `session.dmScope: "per-channel-peer"`, `claude-cli` models). `openclaw gateway restart`,
+> then `openclaw agents list --bindings` + `openclaw health` to verify. Install the systemd
+> user service with `openclaw onboard --install-daemon` and `loginctl enable-linger`."
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  const src = document.getElementById('md').textContent;
+  document.getElementById('content').innerHTML =
+    (window.marked ? marked.parse(src) : '<pre>'+src.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</pre>');
+  document.title = 'OpenClaw — Two-Agent VM Setup Guide';
+</script>
+</body></html>
