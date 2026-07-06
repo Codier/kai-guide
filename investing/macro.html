@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The Hedge &amp; Macro Field Guide — Valuing Stuff With No Earnings</title>
+<style>
+  :root{
+    --bg:#0b0f14; --bg2:#0f1620; --card:#131c28; --card2:#172231;
+    --ink:#e8eef6; --muted:#93a4b8; --faint:#5f7285;
+    --line:#22303f; --line2:#2c3d50;
+    --accent:#f4c66a; --accent2:#7c8cff; --gold:#f4c66a;
+    --green:#37d199; --amber:#f4b740; --red:#ff6b6b; --btc:#f7931a;
+    --mono:"SFMono-Regular",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(1200px 800px at 80% -10%,#2a2313 0,transparent 55%),radial-gradient(900px 700px at -10% 10%,#131a2b 0,transparent 50%),var(--bg);
+    color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--accent)}
+  .backlink{display:inline-block;margin:22px 0 -8px;font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none}
+  .backlink:hover{color:var(--accent)}
+
+  header.hero{padding:20px 0 40px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 16px;font-weight:800;
+    background:linear-gradient(120deg,#fff 10%,#f7d692 55%,#9aa8ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:18px;color:var(--muted);max-width:700px;margin:0}
+  .lede b{color:var(--ink)}
+
+  nav.toc{margin:30px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  nav.toc a{display:flex;gap:10px;align-items:center;text-decoration:none;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:12px 14px;color:var(--ink);font-size:14px;transition:.15s}
+  nav.toc a:hover{border-color:var(--accent);transform:translateY(-1px)}
+  nav.toc .n{font-family:var(--mono);color:var(--accent);font-size:12px}
+
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:26px;margin:0 0 6px;font-weight:750;display:flex;align-items:baseline;gap:12px}
+  h2 .num{font-family:var(--mono);font-size:14px;color:var(--accent2);font-weight:600}
+  h3{font-size:18px;margin:26px 0 8px;color:#fff}
+  p{margin:12px 0}
+  .sub{color:var(--muted);margin-top:2px;font-size:15px}
+
+  .note{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line2);border-left:3px solid var(--accent);
+    border-radius:12px;padding:16px 18px;margin:20px 0}
+  .note.warn{border-left-color:var(--amber)}
+  .note.key{border-left-color:var(--accent2)}
+  .note .t{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+  .formula{font-family:var(--mono);background:#0a1119;border:1px solid var(--line2);border-radius:10px;padding:14px 16px;margin:14px 0;
+    font-size:15px;color:#cfe6ff;overflow-x:auto}
+  .formula .eq{color:var(--gold)}
+
+  .chip{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;letter-spacing:.04em;vertical-align:middle}
+  .chip.green{background:rgba(55,209,153,.14);color:var(--green);border:1px solid rgba(55,209,153,.35)}
+  .chip.amber{background:rgba(244,183,64,.14);color:var(--amber);border:1px solid rgba(244,183,64,.35)}
+  .chip.red{background:rgba(255,107,107,.14);color:var(--red);border:1px solid rgba(255,107,107,.35)}
+  .chip.btc{background:rgba(247,147,26,.14);color:var(--btc);border:1px solid rgba(247,147,26,.4)}
+
+  .metric{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:18px 0}
+  .metric .head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+  .metric .name{font-size:19px;font-weight:750;color:#fff}
+  .metric .tag{font-family:var(--mono);font-size:12px;color:var(--accent)}
+  .metric .rows{margin-top:14px;display:grid;gap:12px}
+  .metric .row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:start}
+  .metric .row .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding-top:2px}
+  .metric .row .val{color:var(--ink);font-size:15px}
+
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}
+  th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  tr:hover td{background:rgba(124,140,255,.05)}
+
+  .steps{counter-reset:s;margin:16px 0;padding:0;list-style:none}
+  .steps li{counter-increment:s;position:relative;padding:12px 0 12px 44px;border-bottom:1px dashed var(--line)}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:11px;width:28px;height:28px;border-radius:8px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06121a;font-family:var(--mono);font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:13px}
+  .steps b{color:#fff}
+
+  .gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:16px}
+  .gloss .g{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .gloss .g .term{font-weight:700;color:var(--accent);font-size:14px;font-family:var(--mono)}
+  .gloss .g .def{font-size:13.5px;color:var(--muted);margin-top:4px}
+
+  /* ladder viz */
+  .ladder{margin:16px 0;display:grid;gap:8px}
+  .rung{display:grid;grid-template-columns:90px 1fr;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  .rung .px{font-family:var(--mono);font-weight:700;color:var(--btc);font-size:15px}
+  .rung .act{font-size:14px;color:var(--muted)}
+  .rung.buy .px{color:var(--green)}
+
+  /* timeline */
+  .tl{position:relative;margin:20px 0;padding-left:24px}
+  .tl::before{content:"";position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:linear-gradient(180deg,var(--red),var(--amber),var(--green))}
+  .tl .ev{position:relative;padding:8px 0 8px 18px;margin-bottom:2px}
+  .tl .ev::before{content:"";position:absolute;left:-24px;top:14px;width:14px;height:14px;border-radius:50%;background:var(--card);border:2px solid var(--accent)}
+  .tl .ev .w{font-family:var(--mono);font-size:12px;color:var(--accent);display:block}
+
+  footer{padding:40px 0 70px;color:var(--faint);font-size:13px}
+  footer .sig{font-family:var(--mono);color:var(--muted)}
+  .pill{display:inline-block;background:var(--card);border:1px solid var(--line2);border-radius:20px;padding:4px 12px;font-family:var(--mono);font-size:11px;color:var(--muted);margin:2px 4px 2px 0}
+  strong.hl{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backlink" href="./">← Part 1: The Valuation Field Guide (stocks)</a>
+
+<header class="hero">
+  <p class="kicker">Field Guide · Part 2 · updated 2026-07-06</p>
+  <h1>The Hedge &amp; Macro Field Guide</h1>
+  <p class="lede">Part 1 valued <b>companies</b> — things with revenue and profit. But BTC, gold, and index funds don't have earnings, so the whole toolkit changes. This is how you think about <b>hedges, crypto, cash, and buying the dip</b> — in plain English.</p>
+  <nav class="toc">
+    <a href="#system"><span class="n">01</span> The portfolio as a system</a>
+    <a href="#dca"><span class="n">02</span> DCA — buying on autopilot</a>
+    <a href="#noearn"><span class="n">03</span> Valuing earning-less assets</a>
+    <a href="#sell"><span class="n">04</span> Sell ladders for volatile assets</a>
+    <a href="#buy"><span class="n">05</span> Buy ladders &amp; the crash fund</a>
+    <a href="#speed"><span class="n">06</span> "Hedges fast, equities slow"</a>
+    <a href="#traps"><span class="n">07</span> Behavioral traps</a>
+    <a href="#glossary"><span class="n">08</span> Quick glossary</a>
+  </nav>
+</header>
+
+<!-- 01 -->
+<section id="system">
+  <h2><span class="num">01</span> The portfolio as a system</h2>
+  <p class="sub">You don't own random things. Each bucket has a job. Balance is the strategy.</p>
+  <p>A portfolio is a team of players with different roles. You size each role on purpose (a "target allocation"), and when one grows too big or too small versus its target, you <b>rebalance</b> — trim the winner, top up the laggard — to keep the risk where you want it.</p>
+  <table>
+    <tr><th>Bucket</th><th>Its job</th><th>Behaves like</th></tr>
+    <tr><td><b>Growth</b> (stocks, crypto)</td><td>Build wealth over years</td><td>High reward, high swings</td></tr>
+    <tr><td><b>Hedges</b> (gold, some crypto)</td><td>Hold value when everything else falls</td><td>Zig when stocks zag</td></tr>
+    <tr><td><b>Cash</b></td><td>Dry powder + safety</td><td>Flat, but ready to deploy</td></tr>
+    <tr><td><b>Income / index funds</b></td><td>Steady, low-effort market exposure</td><td>Slow and broad</td></tr>
+  </table>
+  <div class="note key">
+    <div class="t">Drift &amp; rebalancing</div>
+    If crypto rips +80%, it becomes a bigger slice of the pie than you intended — that's <b>drift</b>. Rebalancing sells a bit of the winner back to target and buys what lagged. It quietly forces "sell high, buy low." (One exception in our rules: crypto has no upper cap, so we let it run and only trim it on its own price ladder — not on drift.)
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="dca">
+  <h2><span class="num">02</span> DCA — buying on autopilot</h2>
+  <p><b>DCA = Dollar-Cost Averaging.</b> Instead of dumping a lump sum in at one price, you buy a fixed dollar amount on a schedule (e.g. every week). Some weeks the price is high, some low — you automatically buy fewer shares when it's expensive and more when it's cheap. Your average cost smooths out.</p>
+  <div class="formula"><span class="eq">DCA</span> = same $ amount, fixed schedule, regardless of price</div>
+  <h3>Why it works</h3>
+  <ul class="steps">
+    <li><b>Kills timing anxiety.</b> You never have to guess the perfect entry — you get the average.</li>
+    <li><b>Removes emotion.</b> The buy happens whether you feel greedy or scared. Discipline beats mood.</li>
+    <li><b>Great for volatile assets.</b> The wilder the swings (crypto), the more the "buy more when cheap" effect helps.</li>
+  </ul>
+  <div class="note warn">
+    <div class="t">The trade-off</div>
+    Over a long <em>rising</em> market, a lump sum invested early usually beats DCA (more time in the market). DCA's edge is <b>risk control and behavior</b>, not maximum return. We use it as a "learning position" tool — start small on a new name, scale up once the thesis proves out.
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="noearn">
+  <h2><span class="num">03</span> Valuing things with no earnings</h2>
+  <p class="sub">You can't run EV/Sales or P/E on gold — it has no sales. Different asset, different lens.</p>
+
+  <div class="metric">
+    <div class="head"><div class="name">🥇 Gold</div><div class="tag">the classic hedge</div></div>
+    <div class="rows">
+      <div class="row"><div class="lbl">What drives it</div><div class="val">Fear, real interest rates, and the US dollar. When "safe" bonds pay little after inflation, gold shines. When the dollar weakens, gold (priced in dollars) rises.</div></div>
+      <div class="row"><div class="lbl">Its job</div><div class="val">Insurance. It usually holds or gains when stocks crash — that's the point, not day-to-day return.</div></div>
+      <div class="row"><div class="lbl">How to "value" it</div><div class="val">No cash flow to discount. You judge it by its <b>role</b> (portfolio insurance) and macro backdrop (real yields, dollar), not by a multiple.</div></div>
+    </div>
+  </div>
+
+  <div class="metric">
+    <div class="head"><div class="name">₿ Bitcoin &amp; crypto</div><div class="tag"><span class="chip btc">growth + hedge, split personality</span></div></div>
+    <div class="rows">
+      <div class="row"><div class="lbl">What drives it</div><div class="val">Scarcity (fixed supply), adoption (more users/institutions), and liquidity (how much easy money is sloshing around). No earnings — value comes from what others will pay and how many use it.</div></div>
+      <div class="row"><div class="lbl">Split personality</div><div class="val">Sometimes it acts like "digital gold" (a hedge); often it trades like a high-octane risk asset (falls hardest in panics). Know which mode the market's in.</div></div>
+      <div class="row"><div class="lbl">How to "value" it</div><div class="val">Frameworks (scarcity models, adoption curves, network value) give rough zones, not precise fair values. So we manage it by <b>position size and price ladders</b>, not a target multiple.</div></div>
+      <div class="row"><div class="lbl">Volatility</div><div class="val">30–50%+ drawdowns are normal. That's why it's sized deliberately and trimmed on the way up.</div></div>
+    </div>
+  </div>
+
+  <div class="metric">
+    <div class="head"><div class="name">📈 Index funds (S&amp;P 500, etc.)</div><div class="tag">you buy the whole market</div></div>
+    <div class="rows">
+      <div class="row"><div class="lbl">What it is</div><div class="val">One fund holding hundreds of companies. You're not betting on one stock — you own the average of the whole market.</div></div>
+      <div class="row"><div class="lbl">How to value</div><div class="val">You <em>can</em> use an aggregate P/E for the whole index, but the honest answer for most people is "time in the market beats timing." Buy steadily, hold for years.</div></div>
+      <div class="row"><div class="lbl">Its job</div><div class="val">Low-effort, diversified growth — the boring backbone that lets you take focused risk elsewhere.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="sell">
+  <h2><span class="num">04</span> Sell ladders for volatile assets</h2>
+  <p>Same idea as the stock trim ladder in Part 1, but for assets with no fair-value anchor you can't set rungs off "value" — so you set them off <b>price</b> and <b>how much you'd regret not selling</b>. As the price climbs into euphoria, you sell pre-set slices, banking profit and reducing risk without ever trying to call the exact top.</p>
+  <div class="ladder">
+    <div class="rung"><div class="px">Level 1</div><div class="act">Price hits first target → sell a small slice, take some risk off</div></div>
+    <div class="rung"><div class="px">Level 2</div><div class="act">Higher target → sell another slice</div></div>
+    <div class="rung"><div class="px">Level 3</div><div class="act">Euphoria zone → trim harder, keep a core "let it ride" stake</div></div>
+  </div>
+  <div class="note">
+    <div class="t">The rule that keeps you honest</div>
+    Only get alerted when price is <em>near</em> a rung — no noise otherwise. And if a rung fires while the crowd is euphoric, you sell into that strength. Same discipline as "trimming into a squeeze" from Part 1: let other people's emotion be your exit liquidity.
+  </div>
+  <div class="note warn">
+    <div class="t">Selling at a loss on purpose</div>
+    Some ladders also have <b>downside</b> triggers — if an asset breaks a level, you cut, even at a loss. That feels awful, but a pre-planned stop is a <em>strategic</em> decision, not an emotional one. The plan protects you from freezing.
+  </div>
+</section>
+
+<!-- 05 -->
+<section id="buy">
+  <h2><span class="num">05</span> Buy ladders &amp; the crash fund</h2>
+  <p>Cash isn't dead money — it's <b>dry powder</b>. The plan for a market crash is written <em>before</em> the crash, when you're calm. As the market falls through pre-set levels, you deploy cash in tiers — buying more the deeper it drops.</p>
+  <div class="ladder">
+    <div class="rung buy"><div class="px">−8%</div><div class="act">Tier 1 → deploy first slice of cash</div></div>
+    <div class="rung buy"><div class="px">−15%</div><div class="act">Tier 2 → deploy more</div></div>
+    <div class="rung buy"><div class="px">−25%+</div><div class="act">Tier 3 → back up the truck</div></div>
+  </div>
+  <p>Why tiers instead of all at once? Because you never know how deep a crash goes. Tiering guarantees you buy <em>some</em> of the discount without blowing your whole cash pile on the first dip. It's DCA's cousin, aimed at fear instead of a calendar.</p>
+</section>
+
+<!-- 06 -->
+<section id="speed">
+  <h2><span class="num">06</span> "Hedges fast, equities slow"</h2>
+  <p>Different assets react to the same shock on <b>different timelines</b>. If a big geopolitical or macro event hits, the insurance-type assets (gold, sometimes crypto, energy/defense) tend to move <em>first and fast</em> — the market reprices fear quickly. The value of the productive companies you own adjusts <em>slower</em>, over quarters, as the real economic effects show up in earnings.</p>
+  <div class="tl">
+    <div class="ev"><span class="w">Day 0 — shock hits</span> Fear spikes. Hedges (gold, defense, energy) jump within days.</div>
+    <div class="ev"><span class="w">Weeks 1–4</span> Risk assets (stocks, crypto) sell off on panic, then start sorting winners from losers.</div>
+    <div class="ev"><span class="w">Months 6–24</span> The real economic impact slowly shows up in company earnings — equities re-rate gradually.</div>
+  </div>
+  <div class="note key">
+    <div class="t">Why this shapes the plan</div>
+    Because hedges pay off fast and equities adjust slowly, you want the insurance <em>on before</em> the event (you can't buy it after it's spiked), and you give the equity side a long runway to play out. It's the logic behind holding hedges you hope you never "need."
+  </div>
+</section>
+
+<!-- 07 -->
+<section id="traps">
+  <h2><span class="num">07</span> Behavioral traps to watch</h2>
+  <div class="gloss">
+    <div class="g"><div class="term">Undersizing in fear</div><div class="def">When a great asset is down on scary headlines, that's often the best time to add — but fear makes you buy too little. If conviction is real, size it like you mean it.</div></div>
+    <div class="g"><div class="term">Chasing the squeeze</div><div class="def">Buying <em>because</em> it's spiking. You're paying the forced-buying premium. Ladders sell into that, they don't chase it.</div></div>
+    <div class="g"><div class="term">Freezing at a loss</div><div class="def">Refusing to execute a planned stop because selling hurts. The pre-written plan exists precisely to override this moment.</div></div>
+    <div class="g"><div class="term">Deferring a trim</div><div class="def">"It'll go higher, I'll sell later." A rule you don't follow isn't a rule. Fire the ladder when it triggers.</div></div>
+    <div class="g"><div class="term">Recency bias</div><div class="def">Assuming whatever just happened will keep happening. Bull runs and crashes both end.</div></div>
+    <div class="g"><div class="term">Confusing price with value</div><div class="def">A higher price isn't proof the thing got better — especially for earning-less assets moved by mood and liquidity.</div></div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section id="glossary">
+  <h2><span class="num">08</span> Quick glossary</h2>
+  <div class="gloss">
+    <div class="g"><div class="term">Allocation</div><div class="def">The % of your portfolio in each bucket. Your risk blueprint.</div></div>
+    <div class="g"><div class="term">Rebalance</div><div class="def">Trim what grew too big, top up what shrank — back to target.</div></div>
+    <div class="g"><div class="term">Drift</div><div class="def">When a bucket wanders off its target % because it moved a lot.</div></div>
+    <div class="g"><div class="term">DCA</div><div class="def">Dollar-Cost Averaging — fixed $ bought on a schedule regardless of price.</div></div>
+    <div class="g"><div class="term">Hedge</div><div class="def">An asset that holds value (or gains) when your main holdings fall. Insurance.</div></div>
+    <div class="g"><div class="term">Dry powder</div><div class="def">Cash kept ready to buy discounts in a crash.</div></div>
+    <div class="g"><div class="term">Drawdown</div><div class="def">A peak-to-trough fall. "−40% drawdown" = down 40% from the high.</div></div>
+    <div class="g"><div class="term">Volatility</div><div class="def">How much the price swings. High = big moves both ways.</div></div>
+    <div class="g"><div class="term">Scarcity</div><div class="def">Fixed/limited supply — a core reason BTC and gold hold value.</div></div>
+    <div class="g"><div class="term">Real yield</div><div class="def">Interest rate after inflation. Low/negative real yields help gold.</div></div>
+    <div class="g"><div class="term">Risk asset</div><div class="def">Something that falls hard in a panic (stocks, most crypto).</div></div>
+    <div class="g"><div class="term">Core position</div><div class="def">The chunk you hold for the long haul and never fully trim.</div></div>
+    <div class="g"><div class="term">Tier / rung</div><div class="def">One pre-set price level in a buy or sell ladder.</div></div>
+    <div class="g"><div class="term">Time in the market</div><div class="def">Staying invested beats trying to jump in/out at perfect times.</div></div>
+  </div>
+</section>
+
+<footer>
+  <div style="margin-bottom:10px">
+    <span class="pill">plain-english</span><span class="pill">hedges &amp; crypto</span><span class="pill">ladders &amp; DCA</span><span class="pill">no personal position data</span>
+  </div>
+  <p><a href="./">← Back to Part 1: The Valuation Field Guide (stocks)</a></p>
+  <p>Concepts only — no private allocations, holdings, or dollar figures are on this page.</p>
+  <p class="sig">— Kai · your assistant · v1 2026-07-06</p>
+</footer>
+
+</div>
+</body>
+</html>
