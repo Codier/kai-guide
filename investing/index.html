@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The Valuation Field Guide — Plain-English Stock Math</title>
+<style>
+  :root{
+    --bg:#0b0f14; --bg2:#0f1620; --card:#131c28; --card2:#172231;
+    --ink:#e8eef6; --muted:#93a4b8; --faint:#5f7285;
+    --line:#22303f; --line2:#2c3d50;
+    --accent:#4fd1c5; --accent2:#7c8cff; --gold:#f4c66a;
+    --green:#37d199; --amber:#f4b740; --red:#ff6b6b;
+    --mono:"SFMono-Regular",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(1200px 800px at 80% -10%,#152233 0,transparent 55%),radial-gradient(900px 700px at -10% 10%,#131a2b 0,transparent 50%),var(--bg);
+    color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  a{color:var(--accent)}
+
+  /* hero */
+  header.hero{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 16px;font-weight:800;
+    background:linear-gradient(120deg,#fff 10%,#9fe9e0 55%,#9aa8ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:18px;color:var(--muted);max-width:680px;margin:0}
+  .lede b{color:var(--ink)}
+
+  /* toc */
+  nav.toc{margin:30px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  nav.toc a{display:flex;gap:10px;align-items:center;text-decoration:none;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:12px 14px;color:var(--ink);font-size:14px;transition:.15s}
+  nav.toc a:hover{border-color:var(--accent);transform:translateY(-1px)}
+  nav.toc .n{font-family:var(--mono);color:var(--accent);font-size:12px}
+
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:26px;margin:0 0 6px;font-weight:750;display:flex;align-items:baseline;gap:12px}
+  h2 .num{font-family:var(--mono);font-size:14px;color:var(--accent2);font-weight:600}
+  h3{font-size:18px;margin:26px 0 8px;color:#fff}
+  p{margin:12px 0}
+  .sub{color:var(--muted);margin-top:2px;font-size:15px}
+
+  /* callouts */
+  .note{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line2);border-left:3px solid var(--accent);
+    border-radius:12px;padding:16px 18px;margin:20px 0}
+  .note.warn{border-left-color:var(--amber)}
+  .note.key{border-left-color:var(--accent2)}
+  .note .t{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+  /* formula block */
+  .formula{font-family:var(--mono);background:#0a1119;border:1px solid var(--line2);border-radius:10px;padding:14px 16px;margin:14px 0;
+    font-size:15px;color:#cfe6ff;overflow-x:auto}
+  .formula .eq{color:var(--gold)}
+  .formula .cm{color:var(--faint)}
+
+  /* chips */
+  .chip{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;letter-spacing:.04em;vertical-align:middle}
+  .chip.green{background:rgba(55,209,153,.14);color:var(--green);border:1px solid rgba(55,209,153,.35)}
+  .chip.amber{background:rgba(244,183,64,.14);color:var(--amber);border:1px solid rgba(244,183,64,.35)}
+  .chip.red{background:rgba(255,107,107,.14);color:var(--red);border:1px solid rgba(255,107,107,.35)}
+
+  /* metric cards */
+  .metric{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:18px 0}
+  .metric .head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+  .metric .name{font-size:19px;font-weight:750;color:#fff}
+  .metric .tag{font-family:var(--mono);font-size:12px;color:var(--accent)}
+  .metric .rows{margin-top:14px;display:grid;gap:12px}
+  .metric .row{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start}
+  .metric .row .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding-top:2px}
+  .metric .row .val{color:var(--ink);font-size:15px}
+  .rbrk{background:#0a1119;border:1px dashed var(--line2);border-radius:10px;padding:10px 13px;font-family:var(--mono);font-size:13.5px;color:#bfe0d9;margin-top:4px}
+
+  /* scale bar */
+  .scale{margin-top:10px;height:34px;border-radius:8px;position:relative;overflow:hidden;
+    background:linear-gradient(90deg,var(--green) 0%,var(--amber) 50%,var(--red) 100%);opacity:.9}
+  .scale .marker{position:absolute;top:-4px;width:2px;height:42px;background:#fff;box-shadow:0 0 8px #fff}
+  .scale .lab{position:absolute;top:8px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;color:#06121a;font-weight:700}
+  .scalecap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:5px}
+
+  /* table */
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}
+  th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  td .src{font-family:var(--mono);font-size:12px;color:var(--accent)}
+  tr:hover td{background:rgba(124,140,255,.05)}
+
+  /* steps */
+  .steps{counter-reset:s;margin:16px 0;padding:0;list-style:none}
+  .steps li{counter-increment:s;position:relative;padding:12px 0 12px 44px;border-bottom:1px dashed var(--line)}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:11px;width:28px;height:28px;border-radius:8px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06121a;font-family:var(--mono);font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:13px}
+  .steps b{color:#fff}
+
+  /* glossary */
+  .gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:16px}
+  .gloss .g{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .gloss .g .term{font-weight:700;color:var(--accent);font-size:14px;font-family:var(--mono)}
+  .gloss .g .def{font-size:13.5px;color:var(--muted);margin-top:4px}
+
+  .svgwrap{margin:18px 0;background:#0a1119;border:1px solid var(--line2);border-radius:12px;padding:18px;overflow-x:auto}
+  footer{padding:40px 0 70px;color:var(--faint);font-size:13px}
+  footer .sig{font-family:var(--mono);color:var(--muted)}
+  .pill{display:inline-block;background:var(--card);border:1px solid var(--line2);border-radius:20px;padding:4px 12px;font-family:var(--mono);font-size:11px;color:var(--muted);margin:2px 4px 2px 0}
+  strong.hl{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <p class="kicker">Field Guide · v1 · updated 2026-07-06</p>
+  <h1>The Valuation Field Guide</h1>
+  <p class="lede">Every word I throw at you when we talk about trimming a stock — <b>EV/Sales, FCF, PEG, normalized P/E, "trimming into a squeeze"</b> — explained in plain English, with the actual RBRK case as the worked example. Read it once and the jargon stops being noise.</p>
+  <nav class="toc">
+    <a href="#idea"><span class="n">01</span> The one idea</a>
+    <a href="#squeeze"><span class="n">02</span> "Trimming into a squeeze"</a>
+    <a href="#sticks"><span class="n">03</span> The measuring sticks</a>
+    <a href="#gates"><span class="n">04</span> The four gates</a>
+    <a href="#logic"><span class="n">05</span> Why require all four</a>
+    <a href="#receipts"><span class="n">06</span> How I verify (receipts)</a>
+    <a href="#ladder"><span class="n">07</span> Anchor &amp; ladder</a>
+    <a href="#glossary"><span class="n">08</span> Quick glossary</a>
+  </nav>
+</header>
+
+<!-- 01 -->
+<section id="idea">
+  <h2><span class="num">01</span> The one idea behind all of it</h2>
+  <p class="sub">Price is what it trades at today. Value is what the business is actually worth. They drift apart — that gap is the whole game.</p>
+  <p>Everything below is just different ways of asking one question: <b>"Am I paying more than this business is worth?"</b> A stock can go up for reasons that have nothing to do with the business getting better (hype, short squeezes, sector momentum). When price runs far ahead of value, you <b>trim</b> — sell a slice, lock in gains, keep the rest — instead of selling everything or doing nothing.</p>
+  <div class="note key">
+    <div class="t">The mental model</div>
+    We set a <b>fair value (FV)</b> — our estimate of what the business is worth per share. Then we build a <b>ladder</b>: pre-decided price levels above FV where we trim a set amount. The ladder is mechanical <em>on purpose</em> — it takes the emotion out. When price hits a rung, we run a quick sanity check (the "four gates" in §4) and act.</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="squeeze">
+  <h2><span class="num">02</span> "Trimming into a squeeze" — decoded</h2>
+  <p>Two pieces of jargon in three words. Let's split them.</p>
+  <h3>What's a "short squeeze"?</h3>
+  <p>Some traders <b>short</b> a stock — they bet it will fall by borrowing shares, selling them, and hoping to buy back cheaper. If the stock instead <em>rises</em>, those shorts start losing money and rush to buy shares back to cap their losses. That buying pushes the price <b>up even more</b>, forcing more shorts to buy — a self-feeding spike. That's a squeeze. Key point: <strong class="hl">the price is rising because of forced buying, not because the business got better.</strong></p>
+  <h3>So "trimming into a squeeze" means…</h3>
+  <p>Selling a slice <em>while</em> that artificial spike is lifting the price — handing your shares to the panicked buyers at an inflated price. You're using their forced demand as your exit liquidity. The opposite (and the mistake) is holding through it hoping it goes higher, then watching it fall back once the squeeze burns out.</p>
+  <div class="note">
+    <div class="t">Why it was the right call for RBRK</div>
+    RBRK jumped ~5% in a day on heavy short interest and options-driven buying — <b>no new business news</b>. Selling into that = taking a good price the crowd handed us, not chasing a story. "A discipline that fires at your level but you defer hoping for more is a discipline you don't actually run."
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="sticks">
+  <h2><span class="num">03</span> The measuring sticks</h2>
+  <p class="sub">Before the ratios: you need to know what goes on the top and bottom. These are the raw ingredients.</p>
+
+  <h3>Market Cap vs. Enterprise Value (EV)</h3>
+  <p><b>Market cap</b> = share price × number of shares. It's the price of the <em>equity</em> alone. But if you were buying the whole company, you'd also inherit its debt and get to keep its cash. <b>Enterprise Value</b> fixes that:</p>
+  <div class="formula"><span class="eq">EV</span> = Market Cap <span class="cm">+</span> Debt <span class="cm">−</span> Cash</div>
+  <div class="svgwrap">
+    <svg viewBox="0 0 640 150" width="100%" height="150" role="img" aria-label="Enterprise value diagram">
+      <rect x="10" y="45" width="180" height="46" rx="8" fill="#7c8cff22" stroke="#7c8cff" stroke-width="1.5"/>
+      <text x="100" y="66" fill="#cbd3ff" font-family="monospace" font-size="13" text-anchor="middle">Market Cap</text>
+      <text x="100" y="82" fill="#7f8db0" font-family="monospace" font-size="11" text-anchor="middle">shares × price</text>
+      <text x="205" y="74" fill="#93a4b8" font-family="monospace" font-size="20" text-anchor="middle">+</text>
+      <rect x="225" y="45" width="130" height="46" rx="8" fill="#ff6b6b22" stroke="#ff6b6b" stroke-width="1.5"/>
+      <text x="290" y="72" fill="#ffc4c4" font-family="monospace" font-size="13" text-anchor="middle">Debt</text>
+      <text x="370" y="74" fill="#93a4b8" font-family="monospace" font-size="20" text-anchor="middle">−</text>
+      <rect x="390" y="45" width="130" height="46" rx="8" fill="#37d19922" stroke="#37d199" stroke-width="1.5"/>
+      <text x="455" y="72" fill="#b6f0dc" font-family="monospace" font-size="13" text-anchor="middle">Cash</text>
+      <text x="535" y="74" fill="#93a4b8" font-family="monospace" font-size="20" text-anchor="middle">=</text>
+      <rect x="555" y="45" width="75" height="46" rx="8" fill="#4fd1c522" stroke="#4fd1c5" stroke-width="1.5"/>
+      <text x="592" y="72" fill="#a9ede6" font-family="monospace" font-size="14" text-anchor="middle">EV</text>
+    </svg>
+  </div>
+  <p>RBRK has <b>more cash than debt</b> (net cash), so its EV is a touch <em>below</em> its market cap. We use EV (not market cap) on the top of most ratios because it's the true "all-in" cost of owning the business.</p>
+
+  <h3>The four things you can measure a company by</h3>
+  <p>Going from "biggest / least honest" to "smallest / hardest to fake":</p>
+  <table>
+    <tr><th>Metric</th><th>Plain meaning</th><th>How gameable?</th></tr>
+    <tr><td><b>Revenue (Sales)</b></td><td>Total money coming in the door.</td><td>Hard to fake, but says nothing about profit.</td></tr>
+    <tr><td><b>EBITDA</b></td><td>Profit <em>before</em> interest, taxes, and accounting write-downs (depreciation/amortization). A rough "operating cash engine."</td><td>Flattering — ignores real costs. Trust it least.</td></tr>
+    <tr><td><b>Free Cash Flow (FCF)</b></td><td>Actual cash left after running the business <em>and</em> paying for equipment/software. Money you could put in your pocket.</td><td>Hardest to fake. Trust it most.</td></tr>
+    <tr><td><b>Earnings (Net income / EPS)</b></td><td>Official accounting profit, per share. GAAP = strict rules; "non-GAAP" = company's adjusted version.</td><td>GAAP honest but noisy for young firms; non-GAAP flatters.</td></tr>
+  </table>
+  <div class="note warn">
+    <div class="t">EBITDA — why you asked, why we rarely lean on it</div>
+    EBITDA is popular because it makes almost any company look profitable (you strip out the ugly parts). For a software company that pays people in <b>stock</b>, EBITDA can hide huge real costs. That's why for RBRK we lean on <b>FCF</b> and <b>normalized earnings</b> instead — they're the honest cousins. EBITDA is a "quick gut-check," not a verdict.
+  </div>
+  <div class="note">
+    <div class="t">"Normalized" earnings — the key trick</div>
+    Fast-growing companies spend so much to grow that they show little/no profit <em>today</em>, so a normal P/E looks absurd (hundreds ×). <b>Normalizing</b> = "assume the company is grown-up and spending like a mature peer — what profit margin would it earn then?" Apply that mature margin to today's revenue → a sensible earnings number you can value. It answers "what's this worth if it stops sprinting and starts printing?"
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="gates">
+  <h2><span class="num">04</span> The four gates</h2>
+  <p class="sub">A "gate" is just a valuation ratio used as a checkpoint: price ÷ some measure of the business. Low = cheap, high = expensive. Each gate looks at value from a different angle so one blind spot can't fool us.</p>
+
+  <!-- gate 1 -->
+  <div class="metric">
+    <div class="head"><div class="name">① EV / Sales</div><div class="tag">RBRK ≈ 11.8× &nbsp;<span class="chip red">rich-ish</span></div></div>
+    <div class="rows">
+      <div class="row"><div class="lbl">In plain words</div><div class="val">How many years of <b>revenue</b> you're paying to own the business. "I'm paying 11.8× a single year's sales."</div></div>
+      <div class="row"><div class="lbl">Formula</div><div class="val"><span class="formula" style="display:inline-block;margin:0">EV ÷ annual revenue</span></div></div>
+      <div class="row"><div class="lbl">Why it matters</div><div class="val">Works even when a company has no profit yet — revenue always exists. Best for young, fast growers.</div></div>
+      <div class="row"><div class="lbl">Cheap vs. dear</div><div class="val">For a ~25%-growth software firm, ~10–15× is the normal "peer band." Under ~8× is a bargain; above ~15× is pricey.</div></div>
+    </div>
+    <div class="scale"><div class="marker" style="left:62%"></div><div class="lab" style="left:62%">RBRK</div></div>
+    <div class="scalecap"><span>cheap · 6×</span><span>fair · 11×</span><span>expensive · 16×</span></div>
+    <div class="rbrk">RBRK: EV $19.4B ÷ FY27 revenue $1.64B = 11.8× → above our ~10.3× "fair" mark; no longer the bargain it once was. This is the <b>weakest red flag</b> — "fairly priced," not egregious.</div>
+  </div>
+
+  <!-- gate 2 -->
+  <div class="metric">
+    <div class="head"><div class="name">② EV / EBITDA <span style="font-size:12px;color:var(--faint)">(gut-check cousin)</span></div><div class="tag">context only</div></div>
+    <div class="rows">
+      <div class="row"><div class="lbl">In plain words</div><div class="val">Price vs. the rough operating cash engine, before the ugly deductions.</div></div>
+      <div class="row"><div class="lbl">Formula</div><div class="val"><span class="formula" style="display:inline-block;margin:0">EV ÷ EBITDA</span></div></div>
+      <div class="row"><div class="lbl">Why we treat it lightly</div><div class="val">For stock-heavy software firms EBITDA overstates real profit, so a "good" EV/EBITDA can be misleading. We show it for context, then defer to FCF.</div></div>
+    </div>
+    <div class="rbrk">We don't gate on EV/EBITDA for RBRK — its EBITDA is distorted by stock-based pay. FCF (gate ③) is the honest version of the same question.</div>
+  </div>
+
+  <!-- gate 3 -->
+  <div class="metric">
+    <div class="head"><div class="name">③ EV / FCF</div><div class="tag">RBRK ≈ 65× &nbsp;<span class="chip red">rich</span></div></div>
+    <div class="rows">
+      <div class="row"><div class="lbl">In plain words</div><div class="val">How many years of <b>real, spendable cash</b> you're paying. The honest profitability gate.</div></div>
+      <div class="row"><div class="lbl">Formula</div><div class="val"><span class="formula" style="display:inline-block;margin:0">EV ÷ annual free cash flow</span></div></div>
+      <div class="row"><div class="lbl">Why it matters</div><div class="val">FCF is the hardest number to fake. If EV/FCF is high but EV/Sales looks OK, you're paying up for <em>future</em> profit that hasn't shown up yet.</div></div>
+      <div class="row"><div class="lbl">Cheap vs. dear</div><div class="val">Rule of thumb: a fair multiple is roughly the growth rate. ~25% cash growth ≈ a fair ~25–35×. 65× is well above that.</div></div>
+    </div>
+    <div class="scale"><div class="marker" style="left:80%"></div><div class="lab" style="left:80%">RBRK</div></div>
+    <div class="scalecap"><span>cheap · 25×</span><span>fair · 40×</span><span>expensive · 70×</span></div>
+    <div class="rbrk">RBRK: EV $19.4B ÷ FY27 FCF ~$0.30B = ~65× (≈59× if the company beats guidance as it usually does). Paying a premium for cash that mostly hasn't arrived yet.</div>
+  </div>
+
+  <!-- gate 4 -->
+  <div class="metric">
+    <div class="head"><div class="name">④ P/E and Normalized P/E</div><div class="tag">norm. ≈ 55× &nbsp;<span class="chip red">rich</span></div></div>
+    <div class="rows">
+      <div class="row"><div class="lbl">In plain words</div><div class="val">Price ÷ profit per share. How many years of earnings you're paying. The everyday "how expensive" number.</div></div>
+      <div class="row"><div class="lbl">Formula</div><div class="val"><span class="formula" style="display:inline-block;margin:0">share price ÷ earnings per share</span></div></div>
+      <div class="row"><div class="lbl">The catch</div><div class="val">RBRK barely earns a GAAP profit today, so its raw P/E is a meaningless ~300×. We use <b>normalized</b> EPS (mature-margin assumption, see §3) → a sensible ~55×.</div></div>
+      <div class="row"><div class="lbl">Cheap vs. dear</div><div class="val">A high-quality 25% grower is worth roughly a 35–40× normalized P/E. 55× is above fair — you're pre-paying for the growth.</div></div>
+    </div>
+    <div class="scale"><div class="marker" style="left:72%"></div><div class="lab" style="left:72%">RBRK</div></div>
+    <div class="scalecap"><span>cheap · 30×</span><span>fair · 38×</span><span>expensive · 55×+</span></div>
+    <div class="rbrk">RBRK: revenue $1.64B × ~22% mature margin ≈ $0.36B normalized earnings → ~$1.58/share → at ~$88 that's ~55×. This is the method that <b>set our $75 fair value</b>, so any price well above $75 shows red here by design.</div>
+  </div>
+
+  <!-- PEG -->
+  <div class="metric">
+    <div class="head"><div class="name">⑤ PEG — the "is the growth worth it?" gate</div><div class="tag">RBRK ≈ 2.2 &nbsp;<span class="chip red">expensive</span></div></div>
+    <div class="rows">
+      <div class="row"><div class="lbl">In plain words</div><div class="val">A P/E means less without knowing how fast the company grows. PEG divides the P/E by the growth rate to make fast and slow growers comparable.</div></div>
+      <div class="row"><div class="lbl">Formula</div><div class="val"><span class="formula" style="display:inline-block;margin:0">P/E ÷ annual growth %</span></div></div>
+      <div class="row"><div class="lbl">The reading</div><div class="val"><span class="chip green">~1.0 = fairly priced</span> &nbsp;<span class="chip amber">1–1.5 = getting rich</span> &nbsp;<span class="chip red">&gt;2 = expensive</span></div></div>
+      <div class="row"><div class="lbl">Nuance</div><div class="val">Same idea can run on sales: <b>sales-PEG ≈ 0.47</b> for RBRK (looks fine). The richness shows up on <em>earnings/cash</em>, not the top line — i.e. the <em>growth</em> is real, but you're overpaying for how it turns into profit.</div></div>
+    </div>
+    <div class="rbrk">RBRK: normalized P/E ~55 ÷ growth ~25 = ~2.2. Earnings-PEG says expensive; sales-PEG says the growth itself is still healthy. Both true — you're paying forward for the profit conversion.</div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section id="logic">
+  <h2><span class="num">05</span> Why require all four to flag</h2>
+  <p>Any single ratio has a blind spot. EV/Sales can look fine while the company burns cash. P/E can be meaningless for a young firm. So the rule is a <b>gate</b>, not a trigger:</p>
+  <ul class="steps">
+    <li><b>All four flag "expensive" → trim.</b> Four different angles agreeing is hard to argue with.</li>
+    <li><b>Only one or two flag → pause and recheck.</b> Probably a quirk of one metric, not real overvaluation.</li>
+    <li><b>Price hits the ladder rung but gates disagree → wait.</b> The rung gets you to <em>look</em>; the gates decide.</li>
+  </ul>
+  <div class="note key">
+    <div class="t">RBRK verdict on the day</div>
+    4 out of 4 flagged expensive (EV/Sales the mildest, the other three clearly). Gate satisfied → the trim was validated by the numbers, not just the price level. Backing it up: business signals were quietly softening (growth decelerating, the cash-collection metric halved year-over-year, the AI catalyst still unproven) — so we were selling strength into weakness-underneath.
+  </div>
+</section>
+
+<!-- 06 -->
+<section id="receipts">
+  <h2><span class="num">06</span> How I verify — the receipts</h2>
+  <p class="sub">You asked "where did this number come from?" Fair. Nothing here is vibes — every input has a source. Here's the paper trail for the RBRK check.</p>
+  <table>
+    <tr><th>Input</th><th>Value used</th><th>Where it comes from</th></tr>
+    <tr><td>Live share price</td><td>~$88</td><td><span class="src">real-time quote feed</span> (Finnhub API / broker quote)</td></tr>
+    <tr><td>Share count</td><td>~228M</td><td><span class="src">company guidance</span> (Q1 FY27 earnings release)</td></tr>
+    <tr><td>Cash &amp; debt</td><td>+$0.6B net cash</td><td><span class="src">10-K / 10-Q</span> balance sheet</td></tr>
+    <tr><td>FY27 revenue</td><td>$1.64B</td><td><span class="src">management guidance</span> (midpoint)</td></tr>
+    <tr><td>FY27 free cash flow</td><td>~$0.30B</td><td><span class="src">management guidance</span> (midpoint)</td></tr>
+    <tr><td>Growth rate</td><td>~25%</td><td><span class="src">guidance math</span> (this year vs last)</td></tr>
+    <tr><td>Mature margin</td><td>~22%</td><td><span class="src">peer comparison</span> (what grown-up software firms earn)</td></tr>
+  </table>
+  <h3>The arithmetic, shown once (EV/Sales)</h3>
+  <ul class="steps">
+    <li><b>Market cap</b> = 228M shares × $88 = <b>$20.1B</b></li>
+    <li><b>EV</b> = $20.1B − $0.6B net cash = <b>~$19.4B</b></li>
+    <li><b>EV/Sales</b> = $19.4B ÷ $1.64B revenue = <b>11.8×</b></li>
+    <li><b>Compare</b> to the ~10.3× that matches our $75 fair value → above it → <span class="chip red">flag</span></li>
+  </ul>
+  <div class="note">
+    <div class="t">The honesty rules I hold myself to</div>
+    Live/changing facts (price, filings) get pulled fresh, never from memory. Estimates are labelled as estimates. Broker figures (your actual fills &amp; P&amp;L) come straight from the Robinhood data, not my arithmetic — and when my earlier estimate was off, I corrected it to the broker number. If a source doesn't exist, I say so rather than invent one.
+  </div>
+</section>
+
+<!-- 07 -->
+<section id="ladder">
+  <h2><span class="num">07</span> The anchor &amp; the ladder</h2>
+  <p>Two last terms that tie it together:</p>
+  <div class="gloss">
+    <div class="g"><div class="term">Anchor / Fair Value (FV)</div><div class="def">Our estimate of what one share is truly worth, from the gates converging. For RBRK: <b>$75</b>. It only moves when the business fundamentally changes (a new proven catalyst, or a new threat).</div></div>
+    <div class="g"><div class="term">Trim ladder</div><div class="def">Pre-set prices <em>above</em> FV where we sell a set slice. E.g. +18% → trim a quarter; +48% → trim another quarter. Mechanical, so a good price never gets talked away.</div></div>
+    <div class="g"><div class="term">Weight-cap ladder</div><div class="def">A second ladder that trims whenever the position grows too big a share of the whole portfolio — risk control, separate from valuation.</div></div>
+    <div class="g"><div class="term">"Whichever is more aggressive wins"</div><div class="def">When both ladders say trim, follow the one that sells more. Keeps you disciplined on both value and risk.</div></div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section id="glossary">
+  <h2><span class="num">08</span> Quick glossary — the one-liners</h2>
+  <div class="gloss">
+    <div class="g"><div class="term">EV</div><div class="def">Enterprise Value = market cap + debt − cash. The all-in cost to own the whole business.</div></div>
+    <div class="g"><div class="term">Revenue / Sales</div><div class="def">Total money coming in. Says nothing about profit.</div></div>
+    <div class="g"><div class="term">EBITDA</div><div class="def">Profit before interest, tax, and write-downs. Flattering; a gut-check, not a verdict.</div></div>
+    <div class="g"><div class="term">FCF</div><div class="def">Free Cash Flow — real cash left after all spending. Hardest to fake.</div></div>
+    <div class="g"><div class="term">EPS</div><div class="def">Earnings per share — accounting profit divided by shares.</div></div>
+    <div class="g"><div class="term">GAAP vs non-GAAP</div><div class="def">Strict official rules vs the company's own adjusted (rosier) version.</div></div>
+    <div class="g"><div class="term">Normalized</div><div class="def">"What if it were mature?" — apply a grown-up profit margin to today's sales.</div></div>
+    <div class="g"><div class="term">P/E</div><div class="def">Price ÷ earnings per share. Years of profit you're paying.</div></div>
+    <div class="g"><div class="term">PEG</div><div class="def">P/E ÷ growth %. ~1 fair, &gt;2 expensive. Makes fast &amp; slow growers comparable.</div></div>
+    <div class="g"><div class="term">Multiple</div><div class="def">Any "× " ratio (11.8×, 55×). Shorthand for how many years you're paying.</div></div>
+    <div class="g"><div class="term">Short squeeze</div><div class="def">Forced buying by losing short-sellers spikes the price — not a business signal.</div></div>
+    <div class="g"><div class="term">Trim</div><div class="def">Sell a slice, keep the rest. Between "hold everything" and "sell out."</div></div>
+    <div class="g"><div class="term">Peer band</div><div class="def">The normal range of a multiple for similar companies. Context for cheap/dear.</div></div>
+    <div class="g"><div class="term">Sandbag</div><div class="def">Management lowballing guidance so they can "beat" it. We adjust for it.</div></div>
+  </div>
+</section>
+
+<footer>
+  <div style="margin-bottom:10px">
+    <span class="pill">plain-english</span><span class="pill">dark-theme</span><span class="pill">RBRK worked example</span><span class="pill">no personal position data</span>
+  </div>
+  <p>Built as a personal reference. All company figures are from public filings &amp; guidance — no private portfolio data is included on this page.</p>
+  <p class="sig">— Kai · your assistant · v1 2026-07-06</p>
+</footer>
+
+</div>
+</body>
+</html>
