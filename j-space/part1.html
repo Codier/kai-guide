@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 1 — How a language model works · The J-space</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <a href="index.html" class="home">🧠 The J-space</a>
+  <span class="dot">·</span>
+  <span>Part 1 of 5</span>
+  <span style="flex:1"></span>
+  <span class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+</div></div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="kicker">Part 1 · The foundation</p>
+  <h1>How a language model actually works</h1>
+  <p class="lede">Before we can talk about a hidden “workspace” inside Claude, we need a rough picture of what’s inside at all. Three ideas do the job: words become numbers, the numbers flow through an assembly line, and most of what happens on that line is invisible.</p>
+</header>
+
+<h2>1. Words become numbers</h2>
+<p>A language model can’t manipulate letters directly. The first thing it does is chop your text into small pieces called <strong>tokens</strong> (roughly words or word-fragments) and turn each one into a long list of numbers — a few thousand of them per token.</p>
+<p>That list of numbers is the model’s way of representing meaning. Think of it as a set of coordinates in a giant space, where words that mean similar things end up near each other. “Paris,” “London,” and “Tokyo” cluster in one neighborhood; “happy” and “joyful” in another. Nothing about the word “Paris” is stored as letters — it’s stored as a <em>location</em>.</p>
+
+<div class="box key">
+  <div class="tag">◆ Key idea</div>
+  <p>Inside the model, a concept isn’t a word — it’s a <strong>pattern of numbers</strong>. Researchers call such a pattern a <strong>representation</strong>. Almost everything in this guide is about reading and editing these internal patterns. Hold onto that word: <em>representation</em>.</p>
+</div>
+
+<h2>2. The assembly line of “layers”</h2>
+<p>Once your prompt is a set of number-patterns, it flows through a long stack of processing stages called <strong>layers</strong> — often dozens of them, stacked one on top of the next. This is what the “deep” in “deep learning” refers to.</p>
+<p>Each layer does a small amount of work and passes an updated set of patterns to the next. Early layers handle surface-level things (spelling, basic grammar). Middle layers start assembling meaning and relationships. Later layers get closer to a decision about the next word to output. It’s an assembly line: raw parts go in one end, and a finished prediction — the next token — comes out the other.</p>
+
+<figure>
+  <div class="diagram">
+  <svg viewBox="0 0 620 250" role="img" aria-label="Diagram: prompt flows through stacked layers to an output word">
+    <defs>
+      <marker id="ar" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#8A857D"/>
+      </marker>
+    </defs>
+    <!-- input -->
+    <rect x="8" y="95" width="96" height="60" rx="10" fill="#FBEDE6" stroke="#F0D9CD"/>
+    <text x="56" y="120" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#C15F3C" font-weight="700">Your</text>
+    <text x="56" y="138" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#C15F3C" font-weight="700">prompt</text>
+    <line x1="106" y1="125" x2="140" y2="125" stroke="#8A857D" stroke-width="1.6" marker-end="url(#ar)"/>
+    <!-- layers -->
+    <g font-family="sans-serif" font-size="11" fill="#55514B" text-anchor="middle">
+      <rect x="146" y="70" width="66" height="110" rx="9" fill="#fff" stroke="#E4DED4"/>
+      <text x="179" y="130">Layer 1</text>
+      <rect x="222" y="70" width="66" height="110" rx="9" fill="#fff" stroke="#E4DED4"/>
+      <text x="255" y="130">Layer 2</text>
+      <text x="320" y="130" font-size="20" fill="#8A857D">· · ·</text>
+      <rect x="352" y="70" width="66" height="110" rx="9" fill="#fff" stroke="#E4DED4"/>
+      <text x="385" y="126">Layer</text><text x="385" y="140">N</text>
+    </g>
+    <line x1="420" y1="125" x2="454" y2="125" stroke="#8A857D" stroke-width="1.6" marker-end="url(#ar)"/>
+    <!-- output -->
+    <rect x="460" y="95" width="150" height="60" rx="10" fill="#E7F0F5" stroke="#D2E3ED"/>
+    <text x="535" y="120" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#3E6E8E" font-weight="700">Next word</text>
+    <text x="535" y="138" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#3E6E8E" font-weight="700">out</text>
+    <text x="310" y="30" text-anchor="middle" font-family="serif" font-size="15" fill="#201F1D" font-weight="700">The internal assembly line</text>
+    <text x="310" y="210" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#8A857D">patterns get refined stage by stage — one word predicted at a time</text>
+  </svg>
+  </div>
+  <figcaption>The model predicts one token, adds it to the text, and runs the whole line again for the next one — over and over.</figcaption>
+</figure>
+
+<h2>3. Most of the work never reaches the page</h2>
+<p>Here’s the part that matters most for the rest of this guide. What you see from a model is only its <strong>output</strong>: the words it writes. But between reading your prompt and writing each word, an enormous amount of internal activity happens across all those layers — far more than ever shows up in the text.</p>
+<p>Some of that hidden activity is bookkeeping (grammar, formatting). But some of it is genuine <em>thinking</em>: weighing options, working out intermediate steps, noticing things. The model can figure something out internally and simply never mention it.</p>
+
+<div class="box example">
+  <div class="tag">▸ Concrete example</div>
+  <p>Ask the model, <em>“How many legs does the animal that spins webs have?”</em> To answer “8,” it first has to realize the animal is a <strong>spider</strong> — but the word “spider” appears nowhere in your question <em>or</em> in its answer. That step happened silently, inside the layers. Remember this example; it comes back as an actual experiment in Part 4.</p>
+</div>
+
+<p>You might have heard of “chain of thought” — when a model writes out its reasoning step by step. That’s useful, but it’s still <em>output</em>: words on the page. The hidden activity we’re talking about is different. It happens in the numbers, silently, whether or not the model writes anything down.</p>
+
+<div class="pull">If you could somehow read those hidden number-patterns, you’d be reading the model’s thoughts — not its words. That is exactly what Anthropic figured out how to do.</div>
+
+<h2>Where we’ve gotten to</h2>
+<ul>
+  <li><strong>Representation</strong> — a pattern of numbers inside the model that stands for a concept.</li>
+  <li><strong>Layers</strong> — the stacked stages the patterns flow through, getting refined at each step.</li>
+  <li><strong>Hidden activity</strong> — the model thinks in these internal patterns, and most of that thinking never appears in its output.</li>
+</ul>
+<p>That’s the whole machine, in three ideas. Next we’ll leave computers for a moment and look at the human-brain idea that inspired the discovery — because the researchers were deliberately hunting for something in Claude that mirrors how <em>our</em> minds separate the conscious from the automatic.</p>
+
+<nav class="partnav">
+  <a href="index.html"><span class="cap">Back</span><br><span class="ttl">Overview</span></a>
+  <a class="next" href="part2.html"><span class="cap">Part 2</span><br><span class="ttl">Conscious vs. unconscious →</span></a>
+</nav>
+
+<div class="footer"><p>Part 1 of 5 · <a href="index.html">contents</a></p></div>
+
+</div>
+</body>
+</html>
