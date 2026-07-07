@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The J-space, explained — a build-up guide</title>
+<meta name="description" content="A from-scratch, no-jargon guide to Anthropic's 2026 discovery of the J-space: a 'global workspace' inside Claude's mind.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <span class="home">🧠 The J-space</span>
+  <span class="dot">·</span>
+  <span>a build-up guide</span>
+</div></div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="kicker">Interpretability, from scratch</p>
+  <h1>What is the “J-space”?</h1>
+  <p class="lede">In July 2026 Anthropic published a finding that surprised a lot of people: hidden inside Claude there’s a small, private “workspace” where it does its real thinking — thoughts it never says out loud.</p>
+  <p class="lede">This guide explains that discovery from the ground up. No AI-engineering background assumed. We’ll build every idea you need, one step at a time, and only then explain the finding itself.</p>
+</header>
+
+<div class="box analogy">
+  <div class="tag">◆ The one-line version</div>
+  <p>Your brain does a huge amount you’re never aware of — balancing your body, parsing grammar — plus a little bit you <em>are</em> aware of, like a thought you can describe or a plan you make on purpose. Anthropic found that Claude has split itself the same way: a small “conscious-access-like” zone (the <strong>J-space</strong>) floating on an ocean of automatic processing. This guide gets you all the way to understanding <em>why that’s a big deal</em> — and what it isn’t (it does <em>not</em> mean Claude is conscious).</p>
+</div>
+
+<h2>How this guide is organized</h2>
+<p>Read it in order. Each part is short and assumes only what came before. The first two parts build the mental toolkit; parts 3–4 are the actual discovery; part 5 is why it matters.</p>
+
+<nav class="toc">
+  <a href="part1.html">
+    <span class="num">1</span>
+    <span><span class="t">How a language model actually works</span>
+    <span class="d">Words as numbers, the assembly line of “layers,” and the huge amount of hidden activity between your prompt and Claude’s reply.</span></span>
+  </a>
+  <a href="part2.html">
+    <span class="num">2</span>
+    <span><span class="t">Conscious vs. unconscious — and “global workspace theory”</span>
+    <span class="d">The neuroscience idea Anthropic borrowed: what makes a thought “consciously accessible,” and the theory of a shared mental broadcast channel.</span></span>
+  </a>
+  <a href="part3.html">
+    <span class="num">3</span>
+    <span><span class="t">The J-space and the J-lens</span>
+    <span class="d">The core finding: a set of internal patterns that hold what Claude is thinking-but-not-saying — and the clever trick used to read them.</span></span>
+  </a>
+  <a href="part4.html">
+    <span class="num">4</span>
+    <span><span class="t">The evidence: five things the J-space can do</span>
+    <span class="d">Report, control, reason, share, and (when deleted) disappear. The experiments that prove it’s doing real work, not just watching.</span></span>
+  </a>
+  <a href="part5.html">
+    <span class="num">5</span>
+    <span><span class="t">Why it matters — safety, limits, and the consciousness question</span>
+    <span class="d">Reading a model’s hidden thoughts, catching misbehavior, what others are already replicating, and the honest caveats.</span></span>
+  </a>
+</nav>
+
+<div class="box">
+  <div class="tag" style="color:var(--ink-soft)">⏱ About</div>
+  <p class="small" style="margin:0">~20 minute read total. Based on Anthropic’s post <em>“A global workspace in language models”</em> (July 6, 2026) and its research paper. Built for Di. Sources are linked at the end of Part 5.</p>
+</div>
+
+<a href="part1.html" class="pull" style="display:block;text-decoration:none;">Start with Part 1 → How a language model actually works.</a>
+
+<div class="footer">
+  <p>A Codier guide · <a href="../">back to guide index</a></p>
+</div>
+
+</div>
+</body>
+</html>
