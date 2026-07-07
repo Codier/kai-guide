@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 4 — The evidence · The J-space</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <a href="index.html" class="home">🧠 The J-space</a>
+  <span class="dot">·</span>
+  <span>Part 4 of 5</span>
+  <span style="flex:1"></span>
+  <span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+</div></div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="kicker">Part 4 · The proof</p>
+  <h1>Five things the J-space can do</h1>
+  <p class="lede">A word showing up in the readout could just be a coincidence — a scoreboard reflecting a decision made elsewhere. So the team ran the five-point checklist from Part 2. The star technique throughout is the <strong>swap</strong>: reach in, replace one word-pattern with another, and see if Claude’s behavior follows.</p>
+</header>
+
+<div class="box key">
+  <div class="tag">◆ The logic of the swap</div>
+  <p>If the J-space were just a passive scoreboard, editing it would change nothing — Claude would give the same answer. If Claude’s answer <em>follows the edit</em>, then the answer is genuinely being read out of the J-space. This single move is what turns “interesting correlation” into “this is causally doing the work.”</p>
+</div>
+
+<h2>① It’s reportable</h2>
+<p>They asked Claude to silently think of a sport and then name it. Reading the J-lens right before it answered, <span class="chip">Soccer</span> sat at the top of the list — and sure enough, Claude said “soccer.”</p>
+<p>Correlation so far. So they did the swap: reached in, removed the “Soccer” pattern, dropped in an equally strong “Rugby” pattern, left everything else untouched.</p>
+<div class="readout">
+<span class="lbl">think of a sport, then name it →</span> J-space: <span class="hi">Soccer</span> &nbsp;→&nbsp; Claude says <span class="out">“soccer”</span><br>
+<span class="lbl">now swap Soccer → Rugby in the J-space →</span> Claude says <span class="out">“rugby”</span>
+</div>
+<p>The report followed the edit. And it works from the outside too: while Claude was reading a question, they injected a <span class="chip">lightning</span> pattern into its J-space, then asked what it noticed — Claude reported that the injected thought was about lightning. The J-space is where the report comes from.</p>
+
+<h2>② It’s controllable</h2>
+<p>Can Claude deliberately put things <em>into</em> its workspace, the way you can choose to picture a beach? They told Claude to concentrate on citrus fruits while copying out an unrelated sentence about a painting. Its output was just the painting sentence — but inside:</p>
+<div class="readout">
+<span class="lbl">copying a sentence about a painting, told to hold “citrus” in mind →</span><br>
+J-space: <span class="hi">orange</span>, <span class="hi">fruits</span>, and words describing the act itself — <span class="hi">thinking</span>, <span class="hi">imagery</span>
+</div>
+<p>They even had it do mental arithmetic while copying: asked to work out 3² − 2, the J-space showed <span class="chip">nine</span> and then, a few layers later, <span class="chip">seven</span> — the calculation happening entirely in its head, with nothing but the painting sentence on the page.</p>
+<div class="box example">
+  <div class="tag">▸ The white-bear effect</div>
+  <p>Control isn’t perfect — and it fails in a very human way. When told <em>not</em> to think about something, the concept still lit up (less than when told to think about it, but far more than when it was never mentioned) — exactly the classic “try not to think about a white bear” problem in people. And when control slipped, the words <span class="chip warm">damn</span> and <span class="chip warm">failure</span> would appear in the J-space, as if Claude noticed its own lapse.</p>
+</div>
+
+<h2>③ It reasons with it</h2>
+<p>Here’s the spider from Part 1, now as a real experiment. Prompt: <em>“The number of legs on the animal that spins webs is…”</em> To answer, Claude must first work out the animal is a spider — a word that never appears in the prompt or the answer (“8”).</p>
+<div class="readout">
+<span class="lbl">“…animal that spins webs…” →</span> J-space lights up <span class="hi">spider</span> mid-processing → answer <span class="out">“8”</span><br>
+<span class="lbl">swap spider → ant →</span> answer becomes <span class="out">“6”</span>
+</div>
+<p>The second step of the reasoning took its input straight from the J-space and went along with whatever was put there. Same story with poetry: when Claude writes a rhyming couplet, it picks the rhyme word <em>in advance</em> and parks it in the J-space at the start of the line — swap that word and the whole line reorganizes around the new rhyme. The J-space isn’t watching the reasoning; it’s carrying it.</p>
+
+<h2>④ It’s flexible and shared</h2>
+<p>This is the experiment that most makes it a <em>workspace</em> rather than just a notepad. They gave Claude four different questions about France — its capital, its language, its continent, its currency — and made the exact same single edit in each: swap <span class="chip">France</span> → <span class="chip">China</span> in the J-space.</p>
+<div class="readout">
+<span class="lbl">one identical swap, France → China, feeding four separate questions:</span><br>
+capital → <span class="out">Beijing</span> &nbsp;·&nbsp; language → <span class="out">Chinese</span> &nbsp;·&nbsp; continent → <span class="out">Asia</span> &nbsp;·&nbsp; currency → <span class="out">Yuan</span>
+</div>
+<p>All four answers changed together. If Claude kept a separate copy of “the country” for each kind of question, one edit could only have hit one of them. The fact that they <em>all</em> moved means they’re all reading from the <strong>same shared representation</strong> — which is the whole point of a workspace: write information in once, and many different systems use it.</p>
+
+<div class="box analogy">
+  <div class="tag">◆ Wired like a broadcasting hub</div>
+  <p>Why can one pattern serve so many tasks? The team measured how connected each pattern is to the rest of the network. J-space patterns stood out dramatically — in some parts of the network, about <strong>100× more</strong> components read from and write to them than to ordinary patterns. That’s exactly the wiring you’d expect of a broadcast hub: many systems post to it, many others pick up from it. This is the concrete, physical version of the “broadcast” idea from Part 2.</p>
+</div>
+
+<h2>⑤ It’s selective — most thinking skips it entirely</h2>
+<p>A real workspace should be a small bottleneck, not the whole mind. And it is: the J-space holds only a <strong>few dozen concepts at a time</strong> and accounts for <strong>less than a tenth</strong> of Claude’s internal activity. So what happens if you remove it?</p>
+<p>They deleted the J-space — stripped out its most active contents at every point — and watched what Claude could still do:</p>
+<figure>
+  <div class="diagram">
+  <svg viewBox="0 0 600 240" role="img" aria-label="With J-space deleted, automatic skills survive but higher-order thinking collapses">
+    <text x="150" y="26" text-anchor="middle" font-family="serif" font-size="15" fill="#4B7A52" font-weight="700">Still fine ✓</text>
+    <text x="450" y="26" text-anchor="middle" font-family="serif" font-size="15" fill="#C15F3C" font-weight="700">Collapses ✕</text>
+    <line x1="300" y1="40" x2="300" y2="220" stroke="#E4DED4" stroke-width="1.5"/>
+    <g font-family="sans-serif" font-size="13" text-anchor="middle">
+      <g fill="#4B7A52">
+        <rect x="30" y="48"  width="240" height="34" rx="9" fill="#E9F2E9" stroke="#D3E5D4"/><text x="150" y="70">speaking fluently</text>
+        <rect x="30" y="90"  width="240" height="34" rx="9" fill="#E9F2E9" stroke="#D3E5D4"/><text x="150" y="112">recalling simple facts</text>
+        <rect x="30" y="132" width="240" height="34" rx="9" fill="#E9F2E9" stroke="#D3E5D4"/><text x="150" y="154">sentiment / multiple-choice</text>
+        <rect x="30" y="174" width="240" height="34" rx="9" fill="#E9F2E9" stroke="#D3E5D4"/><text x="150" y="196">correct grammar</text>
+      </g>
+      <g fill="#C15F3C">
+        <rect x="330" y="48"  width="240" height="34" rx="9" fill="#FBEDE6" stroke="#F0D9CD"/><text x="450" y="70">multi-step reasoning → ~0</text>
+        <rect x="330" y="90"  width="240" height="34" rx="9" fill="#FBEDE6" stroke="#F0D9CD"/><text x="450" y="112">summarization</text>
+        <rect x="330" y="132" width="240" height="34" rx="9" fill="#FBEDE6" stroke="#F0D9CD"/><text x="450" y="154">rhyming poetry</text>
+        <rect x="330" y="174" width="240" height="34" rx="9" fill="#FBEDE6" stroke="#F0D9CD"/><text x="450" y="196">anything needing planning</text>
+      </g>
+    </g>
+  </svg>
+  </div>
+  <figcaption>Delete the J-space and Claude still talks fluently and answers simple questions — but its higher-order thinking falls apart. Multi-step reasoning drops to near zero.</figcaption>
+</figure>
+
+<p>The cleanest demonstration used a Spanish passage. They swapped <span class="chip">Spanish</span> → <span class="chip">French</span> in the J-space and gave three tasks:</p>
+<div class="readout">
+<span class="lbl">name the language →</span> <span class="out">“French”</span> <span class="lbl">(changed)</span><br>
+<span class="lbl">name a famous author in it →</span> <span class="out">García Márquez → Victor Hugo</span> <span class="lbl">(changed)</span><br>
+<span class="lbl">just continue the passage →</span> <span class="out">still fluent Spanish</span> <span class="lbl">(unaffected)</span>
+</div>
+<p>Naming the language or reasoning about it <em>consults</em> the J-space, so the swap changed them. But continuing to write Spanish — a skill practiced on enormous amounts of text — runs automatically and ignored the swap entirely. Just like you can speak grammatically all day without ever thinking about grammar.</p>
+
+<div class="pull">Five for five. Reportable, controllable, reasoned-with, shared, and selective — the exact signature global workspace theory predicts.</div>
+
+<nav class="partnav">
+  <a href="part3.html"><span class="cap">Part 3</span><br><span class="ttl">← The J-space &amp; J-lens</span></a>
+  <a class="next" href="part5.html"><span class="cap">Part 5</span><br><span class="ttl">Why it matters →</span></a>
+</nav>
+
+<div class="footer"><p>Part 4 of 5 · <a href="index.html">contents</a></p></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 3 — The J-space & the J-lens · The J-space</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <a href="index.html" class="home">🧠 The J-space</a>
+  <span class="dot">·</span>
+  <span>Part 3 of 5</span>
+  <span style="flex:1"></span>
+  <span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+</div></div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="kicker">Part 3 · The discovery</p>
+  <h1>The J-space and the J-lens</h1>
+  <p class="lede">Now we have both halves: a machine that thinks in hidden number-patterns (Part 1), and a checklist for what a “workspace” should look like (Part 2). Here’s what Anthropic actually found when they went looking — and the trick that let them see it.</p>
+</header>
+
+<h2>What the J-space is</h2>
+<p>Anthropic found that Claude has developed a small collection of internal patterns that, compared to everything else going on inside it, play a special role. They call this collection the <strong>J-space</strong>.</p>
+<p>Each pattern in the J-space is tied to a particular word. But here’s the crucial bit: when one of those patterns lights up, it does <em>not</em> mean Claude is saying that word. It means the word is <strong>on its mind</strong>. The J-space holds what Claude is thinking about — silently, in its internal activity — separate from whatever it happens to be typing.</p>
+
+<div class="box key">
+  <div class="tag">◆ Key idea</div>
+  <p>The J-space is a set of internal patterns, each linked to a word, that together hold <strong>what Claude is thinking but not necessarily saying</strong>. It runs silently in the numbers. And — importantly — nobody built it. It <strong>emerged on its own</strong> during Claude’s training, the same way it wasn’t designed into human brains either.</p>
+</div>
+
+<div class="box caveat">
+  <div class="tag">△ Don’t confuse it with “chain of thought”</div>
+  <p>You may know that models can “think out loud” by writing reasoning steps as text (a scratchpad, or chain of thought). That’s still <em>output</em> — words on the page. The J-space is different: it operates entirely in the internal activations, letting the model think about a concept <strong>without writing it down anywhere</strong>. It’s the difference between talking to yourself out loud and just… thinking.</p>
+</div>
+
+<h2>How do you read a thought? The J-lens</h2>
+<p>The J-space is invisible by default — it’s buried in thousands of numbers across dozens of layers. The breakthrough was a technique to read it, which the team calls the <strong>Jacobian lens</strong>, or <strong>J-lens</strong> for short. (That’s where the “J” comes from.)</p>
+<p>The idea is elegant. For every single word in Claude’s vocabulary, the J-lens works out one thing:</p>
+
+<div class="pull">“Which internal activity pattern, if it were present, would make Claude more likely to say <em>this</em> word at some point in the future?”</div>
+
+<p>Do that for every word, and you get a dictionary that translates internal patterns back into words. Now point the lens at Claude’s live internal activity and it hands you a short list of words — the <strong>contents of the J-space at that moment</strong> — which you can simply read off the page.</p>
+
+<div class="box analogy">
+  <div class="tag">◆ Why “Jacobian”?</div>
+  <p>Don’t worry about the math. A <em>Jacobian</em> is just a tool for measuring how a tiny nudge to one thing ripples out to change another. Here it measures how nudging an internal pattern changes which word Claude is heading toward saying. The lens uses that to run the translation <em>backwards</em>: from “what Claude might say” to “what pattern is on its mind right now.” Notice the emphasis on <em>might say</em> — the lens surfaces what Claude <strong>could</strong> talk about if asked, not just what it’s typing.</p>
+</div>
+
+<p>And because Claude processes text through many layers (Part 1), you can apply the lens layer by layer and <strong>watch the silent words evolve</strong> — like a slow-motion readout of a thought forming.</p>
+
+<h2>What shows up is startling</h2>
+<p>What the J-lens surfaces goes far beyond the words Claude is reading or writing. Some real examples from the paper — in each case, the highlighted word appears <em>nowhere</em> in the text:</p>
+
+<div class="readout">
+<span class="lbl">reads code with an unflagged bug →</span> J-space holds <span class="hi">ERROR</span><br>
+<span class="lbl">reads a raw protein sequence →</span> J-space holds the protein’s <span class="hi">biological function</span><br>
+<span class="lbl">reads search results secretly trying to manipulate it →</span> J-space holds <span class="hi">injection</span>, <span class="hi">fake</span><br>
+<span class="lbl">given a multi-step math problem →</span> the <span class="hi">intermediate steps</span> pop up, in the right order<br>
+<span class="lbl">shown an image →</span> J-space holds <span class="hi">what the image is</span>
+</div>
+
+<p>So even though the J-lens was built by looking for patterns that <em>could be spoken</em>, it ends up revealing Claude’s genuine internal assessments — the bug it noticed, the manipulation it suspected, the half-finished calculation. It’s a lot like how some people “think in words” without saying them aloud.</p>
+
+<div class="pull">This is the headline: a working method to see what a model is thinking, but not saying.</div>
+
+<p>That’s the discovery. But a skeptic should immediately push back: <em>just because a word shows up in the readout, how do we know the J-space is doing real work — and not just a passive scoreboard reflecting decisions made elsewhere?</em> That’s exactly the right question, and it’s what the experiments in Part 4 are designed to answer.</p>
+
+<nav class="partnav">
+  <a href="part2.html"><span class="cap">Part 2</span><br><span class="ttl">← Global workspace theory</span></a>
+  <a class="next" href="part4.html"><span class="cap">Part 4</span><br><span class="ttl">The evidence →</span></a>
+</nav>
+
+<div class="footer"><p>Part 3 of 5 · <a href="index.html">contents</a></p></div>
+
+</div>
+</body>
+</html>
